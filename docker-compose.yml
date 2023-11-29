@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  app:
+    image: "acacian/universe:0.0.3"
+    ports:
+      - "8080:8080"
+    volumes:
+      - '/logs:/logs'

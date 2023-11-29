@@ -1,0 +1,31 @@
+spring.profiles.active: local, oauth-local
+server:
+  port: 8080
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+  show-actuator: true
+#
+#spring:
+#  jackson:
+#    time-zone: UTC
+#  datasource:
+#    url: jdbc:h2:mem://localhost/~/testdb?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+#  jpa:
+#    properties:
+#      hibernate:
+#        jdbc:
+#          time_zone: UTC
+
+# db 접속
+#211.219.84.87:8081

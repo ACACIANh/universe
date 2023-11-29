@@ -1,0 +1,47 @@
+{{>layout/header}}
+
+<h1> Universe Server </h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <!--            <a href="/posts/save" role="button" class="btn btn-primary">add post</a>-->
+            {{#userName}}
+                Logged in as: <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
+            {{^userName}}
+                <!--                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>-->
+                <a style="background-color:yellow" href="/oauth2/authorization/kakao"
+                   class="btn btn-secondary active" role="button">Kakao Login</a>
+                <a style="background-color:yellowgreen" href="/swagger-ui.html" class="btn btn-secondary active"
+                   role="button">Swagger UI</a>
+                <a style="background-color:dodgerblue" href="/h2-console" class="btn btn-secondary active"
+                   role="button">h2-console UI</a>
+            {{/userName}}
+        </div>
+    </div>
+    <br>
+    <!--    &lt;!&ndash; 목록 출력 영역 &ndash;&gt;-->
+    <!--    <table class="table table-horizontal table-bordered">-->
+    <!--        <thead class="thead-strong">-->
+    <!--        <tr>-->
+    <!--            <th>no</th>-->
+    <!--            <th>title</th>-->
+    <!--            <th>author</th>-->
+    <!--            <th>updated</th>-->
+    <!--        </tr>-->
+    <!--        </thead>-->
+    <!--        <tbody id="tbody">-->
+        <!--        {{#posts}}-->
+    <!--            <tr>-->
+    <!--                <td>{{id}}</td>-->
+    <!--                <td><a href="/posts/update/{{id}}">{{title}}</a></td>-->
+    <!--                <td>{{author}}</td>-->
+    <!--                <td>{{modifiedDate}}</td>-->
+    <!--            </tr>-->
+        <!--        {{/posts}}-->
+    <!--        </tbody>-->
+    <!--    </table>-->
+</div>
+
+{{>layout/footer}}
