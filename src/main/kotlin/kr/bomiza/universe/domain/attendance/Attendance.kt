@@ -1,13 +1,12 @@
 package kr.bomiza.universe.domain.attendance
 
-import kr.bomiza.universe.domain.BaseEntity
-import kr.bomiza.universe.domain.user.User
-import java.time.LocalDateTime
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToOne
+import kr.bomiza.universe.domain.BaseEntity
+import kr.bomiza.universe.domain.user.User
+import java.time.LocalDateTime
 
 @Entity
 class Attendance(

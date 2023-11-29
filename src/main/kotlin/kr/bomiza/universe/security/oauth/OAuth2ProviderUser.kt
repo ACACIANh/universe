@@ -3,8 +3,8 @@ package kr.bomiza.universe.security.oauth
 import kr.bomiza.universe.common.model.enums.UserRole
 import kr.bomiza.universe.common.model.enums.UserState
 import kr.bomiza.universe.common.model.oauth.KakaoUser
+import kr.bomiza.universe.common.util.GsonUtils
 import kr.bomiza.universe.domain.user.User
-import kr.bomiza.universe.common.util.GsonUtil
 
 class OAuth2ProviderUser(
     val attributes: Map<String, Any>,
@@ -19,7 +19,7 @@ class OAuth2ProviderUser(
 
         private fun ofKakao(userNameAttributeName: String, attributes: Map<String, Any>): OAuth2ProviderUser {
 
-            val gson = GsonUtil.getLowerCaseWithUnderscores()
+            val gson = GsonUtils.getLowerCaseWithUnderscores()
 
             val jsonValue = gson.toJson(attributes)
 

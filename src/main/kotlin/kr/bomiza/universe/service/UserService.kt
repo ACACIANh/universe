@@ -1,10 +1,10 @@
 package kr.bomiza.universe.service
 
+import jakarta.transaction.Transactional
 import kr.bomiza.universe.common.model.enums.UserRole
 import kr.bomiza.universe.domain.user.User
 import kr.bomiza.universe.domain.user.UserRepository
 import org.springframework.stereotype.Service
-import jakarta.transaction.Transactional
 
 @Service
 class UserService(

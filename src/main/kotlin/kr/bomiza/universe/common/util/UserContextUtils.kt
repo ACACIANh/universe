@@ -4,7 +4,7 @@ import kr.bomiza.universe.domain.user.User
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 
-class UserContext {
+class UserContextUtils {
     companion object {
         fun getCurrentUser(): User {
             val usernamePasswordAuthenticationToken =

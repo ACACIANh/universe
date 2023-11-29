@@ -1,7 +1,7 @@
 package kr.bomiza.universe.web.controller
 
+import kr.bomiza.universe.common.util.UserContextUtils
 import kr.bomiza.universe.service.UserService
-import kr.bomiza.universe.common.util.UserContext
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,7 +16,7 @@ class AdminController(
     @PostMapping("/api/v1/member/admin")
     override fun userUpdateAdmin(): ResponseEntity<Unit> {
 
-        val user = UserContext.getCurrentUser()
+        val user = UserContextUtils.getCurrentUser()
 
         userService.updateToAdmin(user.email)
 

@@ -1,17 +1,11 @@
 package kr.bomiza.universe.domain.meeting
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import jakarta.persistence.*
 import kr.bomiza.universe.common.model.enums.MeetingUserState
 import kr.bomiza.universe.domain.BaseEntity
 import kr.bomiza.universe.domain.user.User
 import java.time.LocalTime
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.FetchType
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToOne
 
 @Entity
 class MeetingUser(

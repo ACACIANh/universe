@@ -1,21 +1,19 @@
 package kr.bomiza.universe.service
 
-import kr.bomiza.universe.common.model.enums.MDCKeys
 import kr.bomiza.universe.common.model.dto.attendance.AttendanceResponseDto
+import kr.bomiza.universe.common.model.enums.MDCKeys
 import kr.bomiza.universe.common.model.exception.AttendanceCheckOutException
 import kr.bomiza.universe.common.model.exception.ExistAttendanceCheckInException
 import kr.bomiza.universe.common.model.exception.NotFoundAttendanceException
 import kr.bomiza.universe.common.model.exception.NotFoundUserException
 import kr.bomiza.universe.domain.attendance.Attendance
 import kr.bomiza.universe.domain.attendance.AttendanceRepository
-import kr.bomiza.universe.domain.user.User
 import kr.bomiza.universe.domain.user.UserRepository
 import org.slf4j.MDC
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.ObjectUtils
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
 
 
 @Service

@@ -1,5 +1,8 @@
 package kr.bomiza.universe.security.jwt
 
+import jakarta.servlet.FilterChain
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import kr.bomiza.universe.service.UserService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -8,9 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.util.AntPathMatcher
 import org.springframework.web.filter.OncePerRequestFilter
-import jakarta.servlet.FilterChain
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
 
 //Component 등록시 자동 filter 등록
 class JwtAuthenticationFilter(

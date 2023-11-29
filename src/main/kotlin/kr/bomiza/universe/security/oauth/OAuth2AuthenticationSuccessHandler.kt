@@ -1,5 +1,7 @@
 package kr.bomiza.universe.security.oauth
 
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import kr.bomiza.universe.configuration.UniverseProperties
 import kr.bomiza.universe.security.jwt.JwtProvider
 import org.slf4j.Logger
@@ -8,8 +10,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
 import org.springframework.stereotype.Component
 import org.springframework.web.util.UriComponentsBuilder
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
 
 @Component
 class OAuth2AuthenticationSuccessHandler(

@@ -1,9 +1,11 @@
 package kr.bomiza.universe.domain.user
 
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import kr.bomiza.universe.common.model.enums.UserRole
 import kr.bomiza.universe.common.model.enums.UserState
 import kr.bomiza.universe.domain.BaseEntity
-import jakarta.persistence.*
 
 @Entity
 class User(

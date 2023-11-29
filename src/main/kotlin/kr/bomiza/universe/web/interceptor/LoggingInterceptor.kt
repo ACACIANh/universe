@@ -1,5 +1,7 @@
 package kr.bomiza.universe.web.interceptor
 
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import kr.bomiza.universe.common.model.enums.MDCKeys
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -8,14 +10,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
-import kotlin.Any
-import kotlin.Boolean
-import kotlin.Exception
 
 @Component
 class LoggingInterceptor : HandlerInterceptor {

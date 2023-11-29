@@ -1,20 +1,14 @@
 package kr.bomiza.universe.domain.meeting
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
-import kr.bomiza.universe.common.model.enums.MeetingUserState
+import jakarta.persistence.*
 import kr.bomiza.universe.common.model.dto.meeting.MeetingJoinRequestDto
+import kr.bomiza.universe.common.model.enums.MeetingUserState
 import kr.bomiza.universe.common.model.exception.AlreadyJoinException
 import kr.bomiza.universe.domain.BaseEntity
 import kr.bomiza.universe.domain.user.User
 import org.springframework.util.ObjectUtils
 import java.time.LocalDate
-import java.util.Comparator
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToMany
-import jakarta.persistence.OneToOne
 
 @Entity
 class Meeting(
