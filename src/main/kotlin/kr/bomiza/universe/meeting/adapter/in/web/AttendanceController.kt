@@ -23,7 +23,7 @@ class AttendanceController(
 
         val user = UserContextUtils.getCurrentUser()
 
-        attendanceService.attendance(user.id!!, attendanceRequestDto.checkIn)
+        attendanceService.attendance(user.id, attendanceRequestDto.checkIn)
 
         return ResponseEntity.ok().build()
     }

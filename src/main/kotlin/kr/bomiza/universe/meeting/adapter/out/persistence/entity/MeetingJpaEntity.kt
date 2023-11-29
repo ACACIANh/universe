@@ -2,19 +2,21 @@ package kr.bomiza.universe.meeting.adapter.out.persistence.entity
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
+import kr.bomiza.universe.common.BaseEntity
+import kr.bomiza.universe.common.util.UUIDUtils
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinRequestDto
 import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
 import kr.bomiza.universe.meeting.domain.exception.AlreadyJoinException
-import kr.bomiza.universe.common.BaseEntity
 import org.springframework.util.ObjectUtils
 import java.time.LocalDate
 
 @Entity
-class Meeting(
+@Table(name = "meeting")
+class MeetingJpaEntity(
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var masterUser: User,
+    var masterUser: UserJpaEntity,
 
     var date: LocalDate,
 
@@ -23,12 +25,12 @@ class Meeting(
     @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     @JoinColumn(name = "meeting_user_id")
-    var meetingUsers: MutableList<MeetingUser> = mutableListOf(),
+    var meetingUsers: MutableList<MeetingUserJpaEntity> = mutableListOf(),
 
-    ) : BaseEntity() {
+    ) : BaseEntity(UUIDUtils.generate()) {
 
     fun checkJoinAbility(
-        user: User,
+        user: UserJpaEntity,
         requestDto: MeetingJoinRequestDto,
 //        meetingUsers: List<MeetingUser>
     ): Boolean {
@@ -46,7 +48,7 @@ class Meeting(
         return meetingUsers.size < capacityMember
     }
 
-    fun addMeetingUser(meetingUser: MeetingUser) {
+    fun addMeetingUser(meetingUser: MeetingUserJpaEntity) {
         meetingUsers.add(meetingUser)
     }
 
@@ -56,7 +58,7 @@ class Meeting(
             .filter {
                 it.state == MeetingUserState.PARTICIPATION || it.state == MeetingUserState.WAITING
             }
-            .sorted(Comparator.comparing(MeetingUser::createdDate))
+            .sorted(Comparator.comparing(MeetingUserJpaEntity::createdDate))
             .limit(capacityMember.toLong())
             .filter { it.state == MeetingUserState.WAITING }
             .map { it.state = MeetingUserState.PARTICIPATION }

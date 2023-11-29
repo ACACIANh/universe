@@ -2,10 +2,11 @@ package kr.bomiza.universe.meeting.domain.exception
 
 import kr.bomiza.universe.common.UniverseException
 import org.springframework.http.HttpStatus
+import java.util.*
 
 class InvalidAccessResourceException(
-    private val ownerId: Long,
-    private val userId: Long,
+    private val ownerId: UUID,
+    private val userId: UUID,
 ) : UniverseException(
     "Invalid access - resource ownerId : $ownerId, access userId : $userId",
     HttpStatus.UNAUTHORIZED,

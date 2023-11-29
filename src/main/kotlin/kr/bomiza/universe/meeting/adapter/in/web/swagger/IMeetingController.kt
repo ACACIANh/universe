@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
+import java.util.*
 
 @Tag(name = "Meeting", description = "정모")
 @SecurityRequirement(name = "Authorization")
@@ -20,13 +21,13 @@ interface IMeetingController {
 
     fun joinMeeting(
         @Parameter(description = "참여할 정모 id", required = true)
-        @PathVariable meetingId: Long,
+        @PathVariable meetingId: UUID,
         @RequestBody requestDto: MeetingJoinRequestDto
     ): ResponseEntity<MeetingUsersResponseDto>
 
     fun joinMeetingUpdate(
         @Parameter(description = "변경할 정모참여 id", required = true)
-        @PathVariable meetingUserId: Long,
+        @PathVariable meetingUserId: UUID,
         @RequestBody requestDto: MeetingJoinUpdateRequestDto
     ): ResponseEntity<MeetingUsersResponseDto>
 

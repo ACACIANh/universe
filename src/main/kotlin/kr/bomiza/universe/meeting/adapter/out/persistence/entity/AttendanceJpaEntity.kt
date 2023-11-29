@@ -1,22 +1,21 @@
 package kr.bomiza.universe.meeting.adapter.out.persistence.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import kr.bomiza.universe.common.BaseEntity
+import kr.bomiza.universe.common.util.UUIDUtils
 import java.time.LocalDateTime
 
 @Entity
-class Attendance(
+@Table(name = "attendance")
+class AttendanceJpaEntity(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User,
+    var user: UserJpaEntity,
 
     var checkIn: LocalDateTime?,
     var checkOut: LocalDateTime?,
 
-    ) : BaseEntity() {
+    ) : BaseEntity(UUIDUtils.generate()) {
 
 }

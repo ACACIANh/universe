@@ -3,7 +3,7 @@ package kr.bomiza.universe.security.oauth
 import kr.bomiza.universe.meeting.domain.enums.UserRole
 import kr.bomiza.universe.meeting.domain.enums.UserState
 import kr.bomiza.universe.common.util.GsonUtils
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.User
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
 
 class OAuth2ProviderUser(
     val attributes: Map<String, Any>,
@@ -32,8 +32,8 @@ class OAuth2ProviderUser(
         }
     }
 
-    fun toEntity(): User {
-        return User(
+    fun toEntity(): UserJpaEntity {
+        return UserJpaEntity(
             name = kakaoUserInfo.kakaoAccount.profile.nickname,
             email = kakaoUserInfo.kakaoAccount.email,
             picture = kakaoUserInfo.properties.profileImage,

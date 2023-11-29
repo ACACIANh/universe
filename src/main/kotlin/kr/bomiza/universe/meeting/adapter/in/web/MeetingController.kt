@@ -10,6 +10,7 @@ import kr.bomiza.universe.meeting.application.legacy.MeetingService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
+import java.util.*
 
 @RestController
 class MeetingController(
@@ -30,7 +31,7 @@ class MeetingController(
     @PostMapping("/api/v1/meetings/{meetingId}/join")
     @Operation(summary = "정모 참여", description = "정모 참여 설명")
     override fun joinMeeting(
-        @PathVariable meetingId: Long,
+        @PathVariable meetingId: UUID,
         @RequestBody requestDto: MeetingJoinRequestDto
     ): ResponseEntity<MeetingUsersResponseDto> {
 
@@ -44,7 +45,7 @@ class MeetingController(
     @PutMapping("/api/v1/meeting-users/{meetingUserId}")
     @Operation(summary = "정모 참여정보 수정", description = "정모 참여정보 수정 설명")
     override fun joinMeetingUpdate(
-        @PathVariable meetingUserId: Long,
+        @PathVariable meetingUserId: UUID,
         @RequestBody requestDto: MeetingJoinUpdateRequestDto
     ): ResponseEntity<MeetingUsersResponseDto> {
 

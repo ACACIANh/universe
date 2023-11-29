@@ -1,6 +1,6 @@
 package kr.bomiza.universe.security.oauth
 
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.User
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
@@ -32,7 +32,7 @@ class OAuth2UserService(
         return UserOAuth(oAuth2User, providerUser.kakaoUserInfo, user)
     }
 
-    private fun saveOrUpdate(providerUser: OAuth2ProviderUser): User {
+    private fun saveOrUpdate(providerUser: OAuth2ProviderUser): UserJpaEntity {
         val user = userRepository.findByEmail(providerUser.kakaoUserInfo.kakaoAccount.email)
             .map { e ->
                 // 책임? 메소드 분리?

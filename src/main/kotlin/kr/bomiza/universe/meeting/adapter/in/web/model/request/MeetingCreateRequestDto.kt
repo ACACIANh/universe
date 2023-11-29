@@ -2,8 +2,8 @@ package kr.bomiza.universe.meeting.adapter.`in`.web.model.request
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.v3.oas.annotations.media.Schema
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.Meeting
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.User
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingJpaEntity
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
 import java.time.LocalDate
 
 @Schema(description = "정모생성 요청")
@@ -21,7 +21,7 @@ class MeetingCreateRequestDto(
 
     ) {
 
-    fun toEntity(user: User): Meeting {
-        return Meeting(user, date, capacityMember)
+    fun toEntity(user: UserJpaEntity): MeetingJpaEntity {
+        return MeetingJpaEntity(user, date, capacityMember)
     }
 }

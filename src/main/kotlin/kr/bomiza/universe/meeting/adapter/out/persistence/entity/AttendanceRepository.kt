@@ -2,11 +2,12 @@ package kr.bomiza.universe.meeting.adapter.out.persistence.entity
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import java.util.*
 
-interface AttendanceRepository : JpaRepository<Attendance, Long> {
+interface AttendanceRepository : JpaRepository<AttendanceJpaEntity, UUID> {
 
-    @Query("SELECT a FROM Attendance a WHERE a.user.id = :userId AND a.checkOut IS NULL")
-    fun findByUserIdAndCheckIn(userId: Long): Attendance?
-    fun findFirstByUserIdOrderByCreatedDateDesc(userId: Long): Attendance?
-    fun findALLByUserIdOrderByCreatedDateDesc(userId: Long): List<Attendance>
+    @Query("SELECT a FROM AttendanceJpaEntity a WHERE a.user.id = :userId AND a.checkOut IS NULL")
+    fun findByUserIdAndCheckIn(userId: UUID): AttendanceJpaEntity?
+    fun findFirstByUserIdOrderByCreatedDateDesc(userId: UUID): AttendanceJpaEntity?
+    fun findALLByUserIdOrderByCreatedDateDesc(userId: UUID): List<AttendanceJpaEntity>
 }
