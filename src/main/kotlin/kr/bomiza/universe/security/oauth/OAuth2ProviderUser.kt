@@ -1,10 +1,9 @@
 package kr.bomiza.universe.security.oauth
 
-import kr.bomiza.universe.common.model.enums.UserRole
-import kr.bomiza.universe.common.model.enums.UserState
-import kr.bomiza.universe.common.model.oauth.KakaoUser
+import kr.bomiza.universe.meeting.domain.enums.UserRole
+import kr.bomiza.universe.meeting.domain.enums.UserState
 import kr.bomiza.universe.common.util.GsonUtils
-import kr.bomiza.universe.domain.user.User
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.User
 
 class OAuth2ProviderUser(
     val attributes: Map<String, Any>,

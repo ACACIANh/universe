@@ -1,8 +1,7 @@
 package kr.bomiza.universe.security.oauth
 
-import kr.bomiza.universe.common.model.oauth.UserOAuth
-import kr.bomiza.universe.domain.user.User
-import kr.bomiza.universe.domain.user.UserRepository
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.User
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.core.user.OAuth2User

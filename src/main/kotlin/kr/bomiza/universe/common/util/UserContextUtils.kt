@@ -1,6 +1,6 @@
 package kr.bomiza.universe.common.util
 
-import kr.bomiza.universe.domain.user.User
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.User
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 

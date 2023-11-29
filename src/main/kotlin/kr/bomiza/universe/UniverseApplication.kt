@@ -5,10 +5,12 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class UniverseApplication {
-//    @PostConstruct
-//    fun started() {
-//        TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
-//    }
+    /*** UTC
+    @PostConstruct
+    fun started() {
+    TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
+    }
+     ***/
 }
 
 fun main(args: Array<String>) {

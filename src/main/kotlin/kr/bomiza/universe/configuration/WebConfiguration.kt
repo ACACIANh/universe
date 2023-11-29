@@ -2,7 +2,7 @@ package kr.bomiza.universe.configuration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import kr.bomiza.universe.common.jackson.CustomObjectMapperModule
-import kr.bomiza.universe.web.interceptor.LoggingInterceptor
+import kr.bomiza.universe.common.web.LoggingInterceptor
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry

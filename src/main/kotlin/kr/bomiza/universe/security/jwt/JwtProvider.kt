@@ -6,11 +6,11 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
-import kr.bomiza.universe.common.model.exception.auth.NotExistAuthorizationHeader
-import kr.bomiza.universe.common.model.exception.auth.NotExistToken
-import kr.bomiza.universe.common.model.exception.auth.ValidateTokenException
-import kr.bomiza.universe.common.model.oauth.UserOAuth
+import kr.bomiza.universe.security.oauth.UserOAuth
 import kr.bomiza.universe.configuration.UniverseProperties
+import kr.bomiza.universe.security.exception.NotExistAuthorizationHeader
+import kr.bomiza.universe.security.exception.NotExistToken
+import kr.bomiza.universe.security.exception.ValidateTokenException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
