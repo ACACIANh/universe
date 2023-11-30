@@ -1,14 +1,14 @@
 package kr.bomiza.universe.meeting.application.legacy
 
-import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.AttendanceResponseDto
 import kr.bomiza.universe.common.enums.MDCKeys
+import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.AttendanceResponseDto
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceJpaEntity
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceRepository
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
 import kr.bomiza.universe.meeting.domain.exception.AttendanceCheckOutException
 import kr.bomiza.universe.meeting.domain.exception.ExistAttendanceCheckInException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundAttendanceException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundUserException
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceJpaEntity
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceRepository
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
 import org.slf4j.MDC
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

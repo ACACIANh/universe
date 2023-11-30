@@ -1,7 +1,8 @@
 package kr.bomiza.universe.security.oauth
 
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
+import kr.bomiza.universe.security.domain.SecurityUser
+import kr.bomiza.universe.security.domain.UserOAuth
+import kr.bomiza.universe.security.web.SecurityUserRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.core.user.OAuth2User
@@ -12,37 +13,36 @@ import org.springframework.stereotype.Service
  */
 @Service
 class OAuth2UserService(
-    val userRepository: UserRepository,
+    val securityUserRepository: SecurityUserRepository,
 ) : DefaultOAuth2UserService() {
 
     override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User {
 
-        // provider 에서 데이터 가져옴
         val oAuth2User = super.loadUser(userRequest)
 
-        // provider 별 기준 속성
-        val userNameAttributeName =
+        val clientProviderName =
             userRequest.clientRegistration.providerDetails.userInfoEndpoint.userNameAttributeName
 
-        val providerUser = OAuth2ProviderUser.of(userNameAttributeName, oAuth2User.attributes)
+        val providerUser = OAuth2ProviderUser.of(clientProviderName, oAuth2User.attributes)
 
         val user = saveOrUpdate(providerUser)
 
-        // role 넘어가는지 확인 필요
-        return UserOAuth(oAuth2User, providerUser.kakaoUserInfo, user)
+        return UserOAuth(oAuth2User, user)
     }
 
-    private fun saveOrUpdate(providerUser: OAuth2ProviderUser): UserJpaEntity {
-        val user = userRepository.findByEmail(providerUser.kakaoUserInfo.kakaoAccount.email)
-            .map { e ->
-                // 책임? 메소드 분리?
-                e.update(
-                    providerUser.kakaoUserInfo.kakaoAccount.profile.nickname,
-                    providerUser.kakaoUserInfo.properties.profileImage,
-                )
+    private fun saveOrUpdate(providerUser: OAuth2ProviderUser): SecurityUser {
+        val userContext = providerUser.userContext()
+        return securityUserRepository.findByEmail(userContext.email)
+            .map { existingUser ->
+                existingUser.update(userContext)
+                val updatedUser = securityUserRepository.save(existingUser)
+                SecurityUserMapper.toDomain(updatedUser)
             }
-            .orElse(providerUser.toEntity())
-
-        return userRepository.save(user)
+            .orElseGet {
+                val securityUser = providerUser.createUser()
+                val userEntity = SecurityUserMapper.toEntity(securityUser, userContext)
+                securityUserRepository.save(userEntity)
+                securityUser
+            }
     }
 }

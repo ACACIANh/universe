@@ -1,4 +1,4 @@
-package kr.bomiza.universe.security.model
+package kr.bomiza.universe.security.domain
 
 enum class ClientProviderName {
 

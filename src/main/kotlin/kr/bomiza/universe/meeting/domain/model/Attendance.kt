@@ -3,7 +3,7 @@ package kr.bomiza.universe.meeting.domain.model
 import kr.bomiza.universe.common.util.TimeUtils
 import kr.bomiza.universe.common.util.UUIDUtils
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 class Attendance(
     val id: UUID,

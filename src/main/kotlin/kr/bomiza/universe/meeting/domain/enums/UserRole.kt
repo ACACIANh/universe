@@ -4,10 +4,7 @@ enum class UserRole {
 
     GUEST,
     MEMBER,
+    MANAGER,
     ADMIN,
     ;
-
-    fun getRole(): String {
-        return "ROLE_" + this.name
-    }
 }

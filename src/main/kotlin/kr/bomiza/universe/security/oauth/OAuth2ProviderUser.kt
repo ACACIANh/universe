@@ -1,10 +1,13 @@
 package kr.bomiza.universe.security.oauth
 
-import kr.bomiza.universe.meeting.domain.enums.UserRole
-import kr.bomiza.universe.meeting.domain.enums.UserState
 import kr.bomiza.universe.common.util.GsonUtils
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
+import kr.bomiza.universe.common.util.UUIDUtils
+import kr.bomiza.universe.security.domain.Authorities
+import kr.bomiza.universe.security.domain.Authority
+import kr.bomiza.universe.security.domain.OAuthUserContext
+import kr.bomiza.universe.security.domain.SecurityUser
 
+// todo: kakaoUserInfo 대신 상위모델로 공통화
 class OAuth2ProviderUser(
     val attributes: Map<String, Any>,
     val nameAttributeKey: String,
@@ -32,13 +35,18 @@ class OAuth2ProviderUser(
         }
     }
 
-    fun toEntity(): UserJpaEntity {
-        return UserJpaEntity(
-            name = kakaoUserInfo.kakaoAccount.profile.nickname,
+    fun createUser(): SecurityUser {
+        return SecurityUser(
             email = kakaoUserInfo.kakaoAccount.email,
-            picture = kakaoUserInfo.properties.profileImage,
-            state = UserState.ACTIVATE,
-            role = UserRole.MEMBER,
+            Authorities(Authority.MEMBER, Authority.ADMIN)
+        )
+    }
+
+    fun userContext(): OAuthUserContext {
+        return OAuthUserContext(
+            kakaoUserInfo.kakaoAccount.email,
+            kakaoUserInfo.kakaoAccount.profile.nickname,
+            kakaoUserInfo.properties.profileImage
         )
     }
 }

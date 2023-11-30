@@ -1,9 +1,8 @@
-package kr.bomiza.universe.meeting.adapter.`in`.web
+package kr.bomiza.universe.security.web
 
-import kr.bomiza.universe.common.util.UserContextUtils
-import kr.bomiza.universe.meeting.adapter.`in`.web.swagger.IAdminController
-import kr.bomiza.universe.meeting.application.legacy.UserService
+import kr.bomiza.universe.security.domain.SecurityUser
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -11,15 +10,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AdminController(
-    val userService: UserService
+    val securityUserService: SecurityUserService
 ) : IAdminController {
 
     @PostMapping("/api/v1/member/admin")
-    override fun userUpdateAdmin(): ResponseEntity<Unit> {
+    override fun userUpdateAdmin(@AuthenticationPrincipal securityUser: SecurityUser): ResponseEntity<Unit> {
 
-        val user = UserContextUtils.getCurrentUser()
-
-        userService.updateToAdmin(user.email)
+        securityUserService.updateToAdmin(securityUser.email)
 
         return ResponseEntity.ok().build()
     }

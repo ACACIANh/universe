@@ -2,12 +2,8 @@ package kr.bomiza.universe.meeting.adapter.out.persistence.entity
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
-import kr.bomiza.universe.common.BaseEntity
+import kr.bomiza.universe.common.entity.BaseEntity
 import kr.bomiza.universe.common.util.UUIDUtils
-import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinRequestDto
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
-import kr.bomiza.universe.meeting.domain.exception.AlreadyJoinException
-import org.springframework.util.ObjectUtils
 import java.time.LocalDate
 
 @Entity
@@ -28,39 +24,39 @@ class MeetingJpaEntity(
     var meetingUsers: MutableList<MeetingUserJpaEntity> = mutableListOf(),
 
     ) : BaseEntity(UUIDUtils.generate()) {
-
-    fun checkJoinAbility(
-        user: UserJpaEntity,
-        requestDto: MeetingJoinRequestDto,
-//        meetingUsers: List<MeetingUser>
-    ): Boolean {
-
-        if (ObjectUtils.isEmpty(meetingUsers)) {
-            return true;
-        }
-        val isReservedUser =
-            meetingUsers.stream().filter { e -> e.user.id == user.id && e.guest == requestDto.isGuest }
-                .findAny()
-                .isPresent
-        if (isReservedUser) {
-            throw AlreadyJoinException(this.id.toString(), user.id.toString(), requestDto.isGuest.toString())
-        }
-        return meetingUsers.size < capacityMember
-    }
-
-    fun addMeetingUser(meetingUser: MeetingUserJpaEntity) {
-        meetingUsers.add(meetingUser)
-    }
-
-    fun refreshUsers() {
-
-        meetingUsers.stream()
-            .filter {
-                it.state == MeetingUserState.PARTICIPATION || it.state == MeetingUserState.WAITING
-            }
-            .sorted(Comparator.comparing(MeetingUserJpaEntity::createdDate))
-            .limit(capacityMember.toLong())
-            .filter { it.state == MeetingUserState.WAITING }
-            .map { it.state = MeetingUserState.PARTICIPATION }
-    }
+//
+//    fun checkJoinAbility(
+//        user: UserJpaEntity,
+//        requestDto: MeetingJoinRequestDto,
+////        meetingUsers: List<MeetingUser>
+//    ): Boolean {
+//
+//        if (ObjectUtils.isEmpty(meetingUsers)) {
+//            return true;
+//        }
+//        val isReservedUser =
+//            meetingUsers.stream().filter { e -> e.user.id == user.id && e.guest == requestDto.isGuest }
+//                .findAny()
+//                .isPresent
+//        if (isReservedUser) {
+//            throw AlreadyJoinException(this.id.toString(), user.id.toString(), requestDto.isGuest.toString())
+//        }
+//        return meetingUsers.size < capacityMember
+//    }
+//
+//    fun addMeetingUser(meetingUser: MeetingUserJpaEntity) {
+//        meetingUsers.add(meetingUser)
+//    }
+//
+//    fun refreshUsers() {
+//
+//        meetingUsers.stream()
+//            .filter {
+//                it.state == MeetingUserState.PARTICIPATION || it.state == MeetingUserState.WAITING
+//            }
+//            .sorted(Comparator.comparing(MeetingUserJpaEntity::createdDate))
+//            .limit(capacityMember.toLong())
+//            .filter { it.state == MeetingUserState.WAITING }
+//            .map { it.state = MeetingUserState.PARTICIPATION }
+//    }
 }

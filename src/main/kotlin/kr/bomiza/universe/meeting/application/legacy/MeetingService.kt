@@ -1,26 +1,26 @@
 package kr.bomiza.universe.meeting.application.legacy
 
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
+import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto
+import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinRequestDto
+import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinUpdateRequestDto
+import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingResponseDto
+import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingUsersResponseDto
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingJpaEntity
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingRepository
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingUserRepository
+import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
 import kr.bomiza.universe.meeting.domain.enums.UserRole
 import kr.bomiza.universe.meeting.domain.exception.InvalidAccessResourceException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundAdminUserException
-import kr.bomiza.universe.meeting.domain.exception.NotFoundMeetingException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundMeetingUserException
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingJpaEntity
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingRepository
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingUserJpaEntity
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingUserRepository
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
-import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.*
-import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingResponseDto
-import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingUsersResponseDto
+import kr.bomiza.universe.security.domain.SecurityUser
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 const val CAPACITY_MEMBER = 16
@@ -35,36 +35,39 @@ class MeetingService(
 
     @Transactional
     fun createMeeting(
-        user: UserJpaEntity,
+        user: SecurityUser,
         requestDto: MeetingCreateRequestDto,
     ): MeetingResponseDto {
-        val meeting = meetingRepository.save(requestDto.toEntity(user))
+        val userEntity = userRepository.findByEmail(user.email).orElse(null)
+        val meeting = meetingRepository.save(requestDto.toEntity(userEntity))
         return MeetingResponseDto(meeting)
     }
 
     @Transactional
     fun joinMeeting(
-        user: UserJpaEntity,
+        user: SecurityUser,
         meetingId: UUID,
         requestDto: MeetingJoinRequestDto,
     ): MeetingUsersResponseDto {
-        val meeting = meetingRepository.findById(meetingId)
-            .orElseThrow {
-                NotFoundMeetingException(meetingId.toString())
-            }
+//        val meeting = meetingRepository.findById(meetingId)
+//            .orElseThrow {
+//                NotFoundMeetingException(meetingId.toString())
+//            }
+//
+//        val meetingUserState =
+//            if (meeting.checkJoinAbility(user, requestDto)) MeetingUserState.PARTICIPATION else MeetingUserState.WAITING
+//
+//        val meetingUser = MeetingUserJpaEntity(meeting, user, meetingUserState, requestDto.joinTime, requestDto.isGuest)
+//        meeting.addMeetingUser(meetingUser)
 
-        val meetingUserState =
-            if (meeting.checkJoinAbility(user, requestDto)) MeetingUserState.PARTICIPATION else MeetingUserState.WAITING
-
-        val meetingUser = MeetingUserJpaEntity(meeting, user, meetingUserState, requestDto.joinTime, requestDto.isGuest)
-        meeting.addMeetingUser(meetingUser)
-
-        return MeetingUsersResponseDto(meetingUser)
+//        return MeetingUsersResponseDto(meetingUser)
+        // todo: 주석 정상화
+        return joinMeetingUpdate(user, meetingId, MeetingJoinUpdateRequestDto(true, LocalTime.now()))
     }
 
     @Transactional
     fun joinMeetingUpdate(
-        user: UserJpaEntity,
+        user: SecurityUser,
         meetingUserId: UUID,
         requestDto: MeetingJoinUpdateRequestDto,
     ): MeetingUsersResponseDto {

@@ -1,7 +1,7 @@
 package kr.bomiza.universe.meeting.adapter.out.persistence.entity
 
 import jakarta.persistence.*
-import kr.bomiza.universe.common.BaseEntity
+import kr.bomiza.universe.common.entity.BaseEntity
 import kr.bomiza.universe.common.util.UUIDUtils
 import java.time.LocalDateTime
 

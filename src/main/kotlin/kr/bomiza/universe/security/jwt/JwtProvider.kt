@@ -6,8 +6,10 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
-import kr.bomiza.universe.security.oauth.UserOAuth
 import kr.bomiza.universe.configuration.UniverseProperties
+import kr.bomiza.universe.security.domain.Authorities
+import kr.bomiza.universe.security.domain.ClaimKey
+import kr.bomiza.universe.security.domain.UserOAuth
 import kr.bomiza.universe.security.exception.NotExistAuthorizationHeader
 import kr.bomiza.universe.security.exception.NotExistToken
 import kr.bomiza.universe.security.exception.ValidateTokenException
@@ -19,6 +21,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import java.util.*
+import javax.crypto.SecretKey
 
 /**
  * 필수 기능
@@ -40,35 +43,36 @@ class JwtProvider(
     @Value("\${universe.token.expirationMillis}")
     private val jwtExpiration: Long = 0
 
+    // todo: 애플리케이션 뜰때 한번만드는걸로 변경
+    private fun signingKey(): SecretKey? {
+        val keyBytes = jwtSecret.toByteArray()
+        return Keys.hmacShaKeyFor(keyBytes)
+    }
+
     fun generateToken(authentication: Authentication): String {
         val userPrincipal = authentication.principal as UserOAuth   // user 객체 생성
-
         val expiryDate = Date(Date().time + jwtExpiration)
+        val signingKey = signingKey()
 
-        // todo: 추후 중복제거 세번반복
-        val keyBytes = jwtSecret.toByteArray()
-        val signingKey = Keys.hmacShaKeyFor(keyBytes)
+        val userAuthorities = userPrincipal.userAuthorities()
 
         return Jwts.builder()
-            .setSubject(userPrincipal.identifier)      // 고유값
+            .setSubject(userPrincipal.identifier)
+            .claim(ClaimKey.EMAIL.name, userPrincipal.email)
+            .claim(ClaimKey.AUTHORITIES.name, userAuthorities.joinToString())
             .setIssuedAt(Date())
             .setExpiration(expiryDate)
             .signWith(signingKey, algorithm)
             .compact()
     }
 
-    fun getUserEmailFromToken(token: String): String {
+    fun getUserEmail(claims: Claims): String {
+        return claims[ClaimKey.EMAIL.name] as String
+    }
 
-        val keyBytes = jwtSecret.toByteArray()
-        val signingKey = Keys.hmacShaKeyFor(keyBytes)
-
-        val claims: Claims = Jwts.parserBuilder()
-            .setSigningKey(signingKey)
-            .build()
-            .parseClaimsJws(token)
-            .body
-
-        return claims.subject
+    fun getUserAuthorities(claims: Claims): Authorities {
+        val authorities = claims[ClaimKey.AUTHORITIES.name] as String? ?: return Authorities()
+        return Authorities(authorities)
     }
 
     fun getAuthorizationHeader(request: HttpServletRequest): String {
@@ -91,8 +95,7 @@ class JwtProvider(
 
     fun validateToken(token: String): Jws<Claims> {
         try {
-            val keyBytes = jwtSecret.toByteArray()
-            val signingKey = Keys.hmacShaKeyFor(keyBytes)
+            val signingKey = signingKey()
             return Jwts
                 .parserBuilder()
                 .setSigningKey(signingKey)

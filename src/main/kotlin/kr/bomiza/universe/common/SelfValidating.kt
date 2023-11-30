@@ -1,10 +1,6 @@
 package kr.bomiza.universe.common
 
-import jakarta.validation.ConstraintViolation
-import jakarta.validation.ConstraintViolationException
-import jakarta.validation.Validation
-import jakarta.validation.Validator
-import jakarta.validation.ValidatorFactory
+import jakarta.validation.*
 
 abstract class SelfValidating<T> {
     private val validator: Validator

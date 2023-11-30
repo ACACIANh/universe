@@ -3,21 +3,19 @@ package kr.bomiza.universe.security.jwt
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import kr.bomiza.universe.meeting.application.legacy.UserService
+import kr.bomiza.universe.security.domain.SecurityUser
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.util.AntPathMatcher
 import org.springframework.web.filter.OncePerRequestFilter
+import java.util.UUID
 
 //Component 등록시 자동 filter 등록
 class JwtAuthenticationFilter(
-
-    val excludedUrls: Array<String>,
-    val userService: UserService,
-    val jwtProvider: JwtProvider,
+    private val excludedUrls: Array<String>,
+    private val jwtProvider: JwtProvider,
 ) : OncePerRequestFilter() {
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
@@ -38,14 +36,15 @@ class JwtAuthenticationFilter(
             val validateToken = jwtProvider.validateToken(token)
 
             val claims = validateToken.body
-            val email = claims.subject
-            val user = userService.getUser(email)
-            val authorities = mutableListOf(user?.role?.name)
+            val id = UUID.fromString(claims.subject)
+            val email = jwtProvider.getUserEmail(claims)
+            val userAuthorities = jwtProvider.getUserAuthorities(claims)
+            val securityUser = SecurityUser(id, email, userAuthorities)
 
             val authentication = UsernamePasswordAuthenticationToken(
-                user,
+                securityUser,
                 null,
-                authorities.map { SimpleGrantedAuthority(user?.role?.getRole()) } // todo: 람다? + getRole 필요성 체크
+                userAuthorities.toSimpleGrantedAuthorities()
             )
 
             SecurityContextHolder.getContext().authentication = authentication

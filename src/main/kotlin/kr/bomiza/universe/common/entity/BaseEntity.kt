@@ -1,4 +1,4 @@
-package kr.bomiza.universe.common
+package kr.bomiza.universe.common.entity
 
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.Id

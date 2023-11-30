@@ -9,7 +9,7 @@
 7. role 구분해서 출석하면 다른벙 참여할수있게?
 8. 매주 월요일 정모추가 확인
 9. ~~스웨거 디폴트 key, value 변경한지 확인하고 추가하기 ex) isGuest, localtime **~~ 각 필드에서 붙여줘야함
-10. UserContext.getCurrentUser() 개선하기
+10. ~~UserContext.getCurrentUser() 개선하기~~
 11. 정모 참여후 출석체크시 연동할것
 12. ~~jackson isXXX 설정 찾아보기~~
 13. meetingUsers 일급컬렉션으로 변경하기
@@ -21,8 +21,8 @@
 19. 디렉토리 구조 고찰
 20. port, usecase 인터페이스 정의 및 구현
 21. naming - jpaentity
-22. security 토큰으로 요청들어올때 db 로직타는부분 제거하는방향으로 수정
-23. id 를 도메인에서 생성해주고 UUID.randomUUID() 가 제일 깔끔
+22. ~~security 토큰으로 요청들어올때 db 로직타는부분 제거하는방향으로 수정~~
+23. ~~id 를 도메인에서 생성해주고 UUID.randomUUID()~~
 24. web dto 분리
 
 # 개인적인 프로젝트 추가사항

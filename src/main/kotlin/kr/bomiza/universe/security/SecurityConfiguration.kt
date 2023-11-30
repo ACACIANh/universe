@@ -1,18 +1,19 @@
 package kr.bomiza.universe.security
 
-import kr.bomiza.universe.meeting.domain.enums.UserRole
+import kr.bomiza.universe.security.domain.Authority
 import kr.bomiza.universe.security.jwt.JwtAuthenticationEntryPoint
 import kr.bomiza.universe.security.jwt.JwtAuthenticationFilter
 import kr.bomiza.universe.security.jwt.JwtProvider
 import kr.bomiza.universe.security.oauth.OAuth2AuthenticationSuccessHandler
 import kr.bomiza.universe.security.oauth.OAuth2UserService
-import kr.bomiza.universe.meeting.application.legacy.UserService
+import org.apache.logging.log4j.util.Strings
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.core.GrantedAuthorityDefaults
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
@@ -26,7 +27,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector
 class SecurityConfiguration(
     val customOAuth2UserService: OAuth2UserService,
     val jwtProvider: JwtProvider,
-    val userService: UserService,
     val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
     val oAuth2AuthenticationSuccessHandler: OAuth2AuthenticationSuccessHandler,
 ) {
@@ -64,7 +64,7 @@ class SecurityConfiguration(
                 auth.requestMatchers(MvcRequestMatcher.Builder(introspector).pattern(HttpMethod.OPTIONS, "/**"))
                     .permitAll()
                     .requestMatchers(MvcRequestMatcher.Builder(introspector).pattern("/api/v1/**"))
-                    .hasAnyRole(UserRole.MEMBER.name, UserRole.ADMIN.name)        // "ROLE_" 자동 삽입
+                    .hasAnyAuthority(Authority.MEMBER.name, Authority.ADMIN.name)
                     .anyRequest()
                     .authenticated()
             }
@@ -72,9 +72,14 @@ class SecurityConfiguration(
             .logout { logout -> logout.logoutSuccessUrl("/") }
             .sessionManagement { sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(
-                JwtAuthenticationFilter(excludedUrls, userService, jwtProvider),
+                JwtAuthenticationFilter(excludedUrls, jwtProvider),
                 UsernamePasswordAuthenticationFilter::class.java
             )
         return http.build()
+    }
+
+    @Bean
+    fun grantedAuthorityDefaults(): GrantedAuthorityDefaults {
+        return GrantedAuthorityDefaults(Strings.EMPTY)
     }
 }
