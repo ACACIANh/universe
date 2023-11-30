@@ -1,7 +1,6 @@
 package kr.bomiza.universe.security.oauth
 
 import kr.bomiza.universe.common.util.GsonUtils
-import kr.bomiza.universe.common.util.UUIDUtils
 import kr.bomiza.universe.security.domain.Authorities
 import kr.bomiza.universe.security.domain.Authority
 import kr.bomiza.universe.security.domain.OAuthUserContext

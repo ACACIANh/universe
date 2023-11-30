@@ -12,12 +12,13 @@ import java.util.*
 @Entity
 @Table(name = "`user`")
 class UserJpaEntity(
-    val email: String,
+    override val id: UUID,
+//    val email: String,
     var name: String,
     @Enumerated(EnumType.STRING)
     var state: UserState,
     @Enumerated(EnumType.STRING)
     var role: UserRole,
-) : UserEntity(UUID.randomUUID()) {
+) : UserEntity(id) {
 
 }

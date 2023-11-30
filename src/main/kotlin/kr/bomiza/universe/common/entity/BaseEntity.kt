@@ -13,7 +13,7 @@ import java.util.*
 @EntityListeners(AuditingEntityListener::class)
 abstract class BaseEntity(
     @Id
-    var id: UUID
+    open val id: UUID
 ) {
 
     @CreatedDate

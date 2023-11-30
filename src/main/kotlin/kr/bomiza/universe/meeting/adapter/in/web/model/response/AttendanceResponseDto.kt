@@ -2,7 +2,6 @@ package kr.bomiza.universe.meeting.adapter.`in`.web.model.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.v3.oas.annotations.media.Schema
-import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceJpaEntity
 import java.time.LocalDateTime
 import java.util.*
 
@@ -28,10 +27,5 @@ class AttendanceResponseDto(
     @Schema(description = "퇴장 시간")
     var checkOut: LocalDateTime?
 ) {
-    constructor(entity: AttendanceJpaEntity) : this(
-        entity.id,
-        entity.user.id,
-        entity.checkIn!!,
-        entity.checkOut
-    )
+
 }

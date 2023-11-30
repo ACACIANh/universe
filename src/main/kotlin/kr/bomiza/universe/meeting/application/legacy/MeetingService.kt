@@ -38,7 +38,7 @@ class MeetingService(
         user: SecurityUser,
         requestDto: MeetingCreateRequestDto,
     ): MeetingResponseDto {
-        val userEntity = userRepository.findByEmail(user.email).orElse(null)
+        val userEntity = userRepository.findById(user.id).orElse(null)
         val meeting = meetingRepository.save(requestDto.toEntity(userEntity))
         return MeetingResponseDto(meeting)
     }
