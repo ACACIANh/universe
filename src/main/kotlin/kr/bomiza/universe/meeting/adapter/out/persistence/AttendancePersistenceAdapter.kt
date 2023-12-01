@@ -32,8 +32,7 @@ class AttendancePersistenceAdapter(
     }
 
     override fun findALLByUserIdOrderByCreatedDateDesc(userId: UUID): List<Attendance> {
-        return attendanceRepository.findALLByUserIdOrderByCreatedDateDesc(userId).map {
-            meetingPersistenceMapper.mapToDomain(it)
-        }.toList()
+        return attendanceRepository.findALLByUserIdOrderByCreatedDateDesc(userId)
+            .map { meetingPersistenceMapper.mapToDomain(it) }
     }
 }

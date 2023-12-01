@@ -13,11 +13,10 @@ class UserPersistenceAdapter(
     val meetingPersistenceMapper: MeetingPersistenceMapper
 ) : LoadUserPort {
 
+    //todo: 검증로직이 여기있는게 맞는지 검토
     override fun loadUser(userId: UUID): User {
         val userEntity = userRepository.findById(userId)
-            .orElseThrow {
-                NotFoundUserException(userId.toString())
-            }
+            .orElseThrow { NotFoundUserException(userId.toString()) }
         return meetingPersistenceMapper.mapToDomain(userEntity)
     }
 }

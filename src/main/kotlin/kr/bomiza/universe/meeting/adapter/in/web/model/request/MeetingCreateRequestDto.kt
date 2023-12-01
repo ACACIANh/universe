@@ -20,8 +20,4 @@ class MeetingCreateRequestDto(
     val capacityMember: Int,
 
     ) {
-
-    fun toEntity(user: UserJpaEntity): MeetingJpaEntity {
-        return MeetingJpaEntity(user, date, capacityMember)
-    }
 }

@@ -1,5 +1,6 @@
 package kr.bomiza.universe.meeting.adapter.`in`.web.swagger
 
+import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -21,11 +22,13 @@ import java.util.*
 interface IMeetingController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "정모 생성", description = "정모생성 설명")
     fun createMeeting(
         @AuthenticationPrincipal securityUser: SecurityUser,
         @RequestBody requestDto: MeetingCreateRequestDto
     ): ResponseEntity<Long>
 
+    @Operation(summary = "정모 참여", description = "정모 참여 설명")
     fun joinMeeting(
         @AuthenticationPrincipal securityUser: SecurityUser,
         @Parameter(description = "참여할 정모 id", required = true)
@@ -33,6 +36,7 @@ interface IMeetingController {
         @RequestBody requestDto: MeetingJoinRequestDto
     ): ResponseEntity<MeetingUsersResponseDto>
 
+    @Operation(summary = "정모 참여정보 수정", description = "정모 참여정보 수정 설명")
     fun joinMeetingUpdate(
         @AuthenticationPrincipal securityUser: SecurityUser,
         @Parameter(description = "변경할 정모참여 id", required = true)
@@ -40,5 +44,6 @@ interface IMeetingController {
         @RequestBody requestDto: MeetingJoinUpdateRequestDto
     ): ResponseEntity<MeetingUsersResponseDto>
 
+    @Operation(summary = "모든 정모 확인", description = "모든 정모 확인 설명")
     fun findAllMeetings(): ResponseEntity<Collection<MeetingResponseDto>>
 }

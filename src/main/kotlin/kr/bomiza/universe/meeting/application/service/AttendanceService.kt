@@ -1,5 +1,6 @@
 package kr.bomiza.universe.meeting.application.service
 
+import kr.bomiza.universe.common.annotation.UseCase
 import kr.bomiza.universe.meeting.application.port.`in`.AttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.FindAllAttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.FindLastAttendanceUseCase
@@ -10,13 +11,11 @@ import kr.bomiza.universe.meeting.domain.exception.AttendanceCheckOutException
 import kr.bomiza.universe.meeting.domain.exception.ExistAttendanceCheckInException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundAttendanceException
 import kr.bomiza.universe.meeting.domain.model.Attendance
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.ObjectUtils
 import java.util.*
 
-
-@Service
+@UseCase
 @Transactional(readOnly = true)
 class AttendanceService(
     val loadUserPort: LoadUserPort,
@@ -26,6 +25,7 @@ class AttendanceService(
     FindAllAttendanceUseCase,
     FindLastAttendanceUseCase {
 
+    // todo: 이 메서드 검토
     @Transactional
     override fun attendance(userId: UUID, checkIn: Boolean) {
 

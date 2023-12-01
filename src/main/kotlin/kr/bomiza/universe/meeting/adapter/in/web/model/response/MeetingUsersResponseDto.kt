@@ -40,12 +40,4 @@ class MeetingUsersResponseDto(
     @Schema(description = "게스트시 true", example = "false")
     val isGuest: Boolean,
 ) {
-    constructor(entity: MeetingUserJpaEntity) : this(
-        meetingUserId = entity.id,
-        userId = entity.user.id,
-        userName = entity.user.name,
-        state = entity.state,
-        joinTime = entity.joinTime,
-        isGuest = entity.guest
-    )
 }

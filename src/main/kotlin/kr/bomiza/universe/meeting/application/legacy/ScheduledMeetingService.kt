@@ -11,7 +11,7 @@ const val EVERY_MONDAY = "0 0 12 ? * MON"
 
 @Service
 class ScheduledMeetingService(
-    val meetingService: MeetingService
+    val meetingService: MeetingServiceLegacy
 ) {
     /*** EVERY_SECOND
     @Scheduled(cron = EVERY_SECOND)

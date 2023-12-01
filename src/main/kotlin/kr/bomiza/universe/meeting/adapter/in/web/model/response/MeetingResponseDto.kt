@@ -29,10 +29,4 @@ class MeetingResponseDto(
     @Schema(description = "정모 참여 리스트")
     var meetingUsers: List<MeetingUsersResponseDto>,
 ) {
-    constructor(entity: MeetingJpaEntity) : this(
-        entity.id,
-        entity.date,
-        entity.capacityMember,
-        entity.meetingUsers.map(::MeetingUsersResponseDto)
-    )
 }

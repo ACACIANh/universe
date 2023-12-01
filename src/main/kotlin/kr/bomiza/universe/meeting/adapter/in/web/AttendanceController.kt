@@ -1,5 +1,6 @@
 package kr.bomiza.universe.meeting.adapter.`in`.web
 
+import kr.bomiza.universe.common.annotation.WebAdapter
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.AttendanceRequestDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.AttendanceResponseDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.swagger.IAttendanceController
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
+@WebAdapter
 @RestController
 class AttendanceController(
     val attendanceUseCase: AttendanceUseCase,
@@ -36,7 +38,6 @@ class AttendanceController(
     @GetMapping("/api/v1/attendances/last")
     override fun findLastAttendance(
         @AuthenticationPrincipal securityUser: SecurityUser
-
     ): ResponseEntity<AttendanceResponseDto> {
 
         val lastAttendance = findLastAttendanceUseCase.findLastAttendance(securityUser.id)
