@@ -2,8 +2,10 @@ package kr.bomiza.universe.security.web
 
 import jakarta.persistence.*
 import kr.bomiza.universe.common.entity.UserEntity
+import kr.bomiza.universe.meeting.domain.enums.UserRole
 import kr.bomiza.universe.security.domain.Authority
 import kr.bomiza.universe.security.domain.OAuthUserContext
+import kr.bomiza.universe.security.domain.UserState
 import java.util.*
 
 @Entity
@@ -18,7 +20,14 @@ class SecurityUserJpaEntity(
     @Column(name = "authority")
     val authorities: Set<Authority>,
 
+    @Enumerated(EnumType.STRING)
+    private var state: UserState,
+
+    @Enumerated(EnumType.STRING)
+    private var role: UserRole,
+
     private var name: String,
+
     private var picture: String,
 ) : UserEntity(id) {
 

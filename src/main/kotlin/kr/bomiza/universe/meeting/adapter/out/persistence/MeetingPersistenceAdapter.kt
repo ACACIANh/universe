@@ -23,6 +23,7 @@ class MeetingPersistenceAdapter(
     LoadMeetingUserPort,
     SaveMeetingPort,
     SaveMeetingUserPort {
+
     override fun findAll(): List<Meeting> {
         return meetingRepository.findAll()
             .map { meetingPersistenceMapper.mapToDomain(it) }

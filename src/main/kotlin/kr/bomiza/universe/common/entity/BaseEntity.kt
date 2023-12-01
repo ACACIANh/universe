@@ -21,4 +21,5 @@ abstract class BaseEntity(
 
     @LastModifiedDate
     lateinit var modifiedDate: LocalDateTime
+
 }

@@ -18,7 +18,7 @@ class MeetingUsers(
 
         val meetingUser = MeetingUser(meeting, user, stateCheck(), joinTime, isGuest)
         meetingUsers.plus(meetingUser)
-        //todo: plus 하고 size 가 0 나오는데 이유찾기
+        //todo: plus 하고 size 가 0 나오는데 이유찾기 (될때도있는데 안되는 상황 찾아보기)
         return meetingUser
     }
 

@@ -11,12 +11,11 @@ import java.util.*
 @Table(name = "meeting_user")
 class MeetingUserJpaEntity(
 
-    @Id
     override var id: UUID,
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "meeting_id")
+    @JoinColumn(name = "meeting_id", unique = false)
     var meeting: MeetingJpaEntity,
 
     @OneToOne(fetch = FetchType.LAZY)

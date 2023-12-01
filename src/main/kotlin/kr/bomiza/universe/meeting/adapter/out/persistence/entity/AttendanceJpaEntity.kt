@@ -9,7 +9,6 @@ import java.util.*
 @Table(name = "attendance")
 class AttendanceJpaEntity(
 
-    @Id
     override var id: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)

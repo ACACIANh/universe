@@ -12,15 +12,15 @@
 10. ~~UserContext.getCurrentUser() 개선하기~~
 11. 정모 참여후 출석체크시 연동할것
 12. ~~jackson isXXX 설정 찾아보기~~
-13. meetingUsers 일급컬렉션으로 변경하기
+13. ~~meetingUsers 일급컬렉션으로 변경하기~~
 14. 테스트코드 만들기
 15. ~~swagger code 인터페이스로 분리~~
 16. restdocs 추가
 17. 로그 남기는 방법 -> 파일 or 다른방법?
-18. 엔티티와 도메인 분리
+18. ~~엔티티와 도메인 분리~~
 19. 디렉토리 구조 고찰
-20. port, usecase 인터페이스 정의 및 구현
-21. naming - jpaentity
+20. ~~port, usecase 인터페이스 정의 및 구현~~
+21. ~~naming - jpaentity~~
 22. ~~security 토큰으로 요청들어올때 db 로직타는부분 제거하는방향으로 수정~~
 23. ~~id 를 도메인에서 생성해주고 UUID.randomUUID()~~
 24. web dto 분리
@@ -47,7 +47,6 @@
 3. 카카오 정보 갱신 타이밍 확인 ***
 4. ~~requestBody, pathVariable 개선 -> 하나로 통일 ( 둘다 애매함 )~~
 5. ~~controller 에서 entity 바로 리턴 해주는데, controller dto 로 수정해서 반환~~ ***중요함***
-6. 객체지향적이지 않은 코드 개선? ex) meeting, user 관계
 7. ~~loadUserByUsername 이거 사용하는지 확인하고 제대로 수정~~ UserDetails 코드 제거
 8. ~~zonedatetime -> localdatetime 으로 찾아서 수정~~
 
