@@ -2,6 +2,7 @@ package kr.bomiza.universe.common
 
 import jakarta.validation.*
 
+@Suppress("UNCHECKED_CAST")
 abstract class SelfValidating<T> {
     private val validator: Validator
 
@@ -16,7 +17,7 @@ abstract class SelfValidating<T> {
      */
     protected fun validateSelf() {
         val violations: Set<ConstraintViolation<T>> = validator.validate(this as T)
-        if (!violations.isEmpty()) {
+        if (violations.isNotEmpty()) {
             throw ConstraintViolationException(violations)
         }
     }
