@@ -15,7 +15,8 @@ class AttendanceJpaEntity(
     @JoinColumn(name = "user_id")
     var user: UserJpaEntity,
 
-    var checkIn: LocalDateTime?,
+    var checkIn: LocalDateTime,
+    
     var checkOut: LocalDateTime?,
 
     ) : BaseEntity(id) {

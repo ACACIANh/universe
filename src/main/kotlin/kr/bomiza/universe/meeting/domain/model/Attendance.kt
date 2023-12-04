@@ -8,17 +8,17 @@ import java.util.*
 class Attendance(
     override val id: UUID,
     var user: User,
-    var checkIn: LocalDateTime?,
+    var checkIn: LocalDateTime,
     var checkOut: LocalDateTime?,
 ) : Base(id) {
 
     companion object {
         fun checkIn(user: User): Attendance {
-            return Attendance(newInstance(), user, TimeUtils.currentTime(), null)
+            return Attendance(newInstance(), user, TimeUtils.requestTime(), null)
         }
     }
 
     fun checkOut() {
-        this.checkOut = TimeUtils.currentTime()
+        this.checkOut = TimeUtils.requestTime()
     }
 }

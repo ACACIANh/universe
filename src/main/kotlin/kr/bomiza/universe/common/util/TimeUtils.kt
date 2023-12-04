@@ -6,8 +6,12 @@ import java.time.LocalDateTime
 
 class TimeUtils {
     companion object {
-        fun currentTime(): LocalDateTime {
+        fun requestTime(): LocalDateTime {
             return LocalDateTime.parse(MDC.get(MDCKeys.REQUEST_TIME.name))
+        }
+
+        fun currentTime(): LocalDateTime {
+            return LocalDateTime.now()
         }
     }
 }

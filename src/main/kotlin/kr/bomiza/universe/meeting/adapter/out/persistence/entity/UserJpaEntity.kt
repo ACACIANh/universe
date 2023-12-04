@@ -15,8 +15,10 @@ class UserJpaEntity(
     override val id: UUID,
 //    val email: String,
     var name: String,
+
     @Enumerated(EnumType.STRING)
     var state: UserState,
+
     @Enumerated(EnumType.STRING)
     var role: UserRole,
 ) : UserEntity(id) {

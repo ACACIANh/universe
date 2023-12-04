@@ -10,19 +10,6 @@ import org.springframework.stereotype.Component
 // todo: 개선방법 생각해보기
 @Component
 class MeetingPersistenceMapper {
-    //todo: 변환 확인하고 지울것
-    fun mapToDomain(attendanceJpaEntity: AttendanceJpaEntity): Attendance {
-        return Attendance(
-            attendanceJpaEntity.id,
-            mapToDomain(attendanceJpaEntity.user),
-            attendanceJpaEntity.checkIn,
-            attendanceJpaEntity.checkOut
-        )
-    }
-
-    fun mapToEntity(attendance: Attendance): AttendanceJpaEntity {
-        return AttendanceJpaEntity(attendance.id, mapToEntity(attendance.user), attendance.checkIn, attendance.checkOut)
-    }
 
     fun mapToDomain(entity: UserJpaEntity): User {
         return User(entity.id, entity.name, entity.state, entity.role)
@@ -32,8 +19,16 @@ class MeetingPersistenceMapper {
         return UserJpaEntity(user.id, user.name, user.state, user.role)
     }
 
+    fun mapToDomain(attendanceJpaEntity: AttendanceJpaEntity): Attendance {
+        return Attendance(attendanceJpaEntity.id, mapToDomain(attendanceJpaEntity.user), attendanceJpaEntity.checkIn, attendanceJpaEntity.checkOut)
+    }
+
+    fun mapToEntity(attendance: Attendance): AttendanceJpaEntity {
+        return AttendanceJpaEntity(attendance.id, mapToEntity(attendance.user), attendance.checkIn, attendance.checkOut)
+    }
+
     fun mapToDomain(entity: MeetingJpaEntity): Meeting {
-        return Meeting( entity.id, mapToDomain(entity.masterUser), entity.date, entity.capacityMember, MeetingUsers(entity.meetingUsers.map { mapToDomain(it) }))
+        return Meeting( entity.id, mapToDomain(entity.masterUser), entity.date, entity.capacityMember, MeetingUsers(entity.meetingUsers.map { mapToDomain(it) }.toMutableList()))
     }
 
     fun mapToEntity(meeting: Meeting): MeetingJpaEntity {
@@ -41,7 +36,7 @@ class MeetingPersistenceMapper {
     }
 
     fun mapToDomain(entity: MeetingUserJpaEntity): MeetingUser {
-        return MeetingUser( mapToDomain(entity.meeting), mapToDomain(entity.user), entity.state, entity.joinTime, entity.guest)
+        return MeetingUser( entity.id, mapToDomain(entity.meeting), mapToDomain(entity.user), entity.state, entity.joinTime, entity.guest)
     }
 
     fun mapToEntity(meetingUser: MeetingUser): MeetingUserJpaEntity {

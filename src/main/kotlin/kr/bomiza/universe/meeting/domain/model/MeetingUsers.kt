@@ -6,10 +6,10 @@ import kr.bomiza.universe.meeting.domain.exception.AlreadyJoinException
 import java.time.LocalTime
 
 class MeetingUsers(
-    val meetingUsers: List<MeetingUser>
+    val meetingUsers: MutableList<MeetingUser>
 ) {
     constructor() : this(ArrayList<MeetingUser>())
-    constructor(vararg meetingUsers: MeetingUser) : this(meetingUsers.toList())
+    constructor(vararg meetingUsers: MeetingUser) : this(meetingUsers.toMutableList())
 
     fun join(meeting: Meeting, user: User, joinTime: LocalTime, isGuest: Boolean): MeetingUser {
         meetingUsers.stream()
@@ -17,12 +17,10 @@ class MeetingUsers(
             .anyMatch { throw AlreadyJoinException(it.id.toString(), user.id.toString(), isGuest.toString()) }
 
         val meetingUser = MeetingUser(meeting, user, stateCheck(), joinTime, isGuest)
-        meetingUsers.plus(meetingUser)
-        //todo: plus 하고 size 가 0 나오는데 이유찾기 (될때도있는데 안되는 상황 찾아보기)
+        meetingUsers.add(meetingUser)
         return meetingUser
     }
 
-    // todo: == 비교 맞는지 확인 후 수정
     private fun alreadyJoinCheck(e: MeetingUser, user: User, isGuest: Boolean) =
         e.user.id == user.id && e.guest == isGuest
 
@@ -40,5 +38,9 @@ class MeetingUsers(
             .limit(CAPACITY_MEMBER.toLong())
             .filter { it.state == MeetingUserState.WAITING }
             .map { it.state = MeetingUserState.PARTICIPATION }
+    }
+
+    fun currentUserCount(): Int {
+        return meetingUsers.count()
     }
 }

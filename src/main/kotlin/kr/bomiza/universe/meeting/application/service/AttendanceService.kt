@@ -32,12 +32,12 @@ class AttendanceService(
         val attendance = loadAttendancePort.findByUserIdAndCheckIn(userId)
 
         if (checkIn) {
-            if (ObjectUtils.isEmpty(attendance)) {
-                val user = loadUserPort.loadUser(userId)
-                saveAttendancePort.saveAttendance(Attendance.checkIn(user))
-                return
+            if (!ObjectUtils.isEmpty(attendance)) {
+                throw ExistAttendanceCheckInException(attendance?.id.toString())
             }
-            throw ExistAttendanceCheckInException(attendance?.id.toString())
+            val user = loadUserPort.loadUser(userId)
+            saveAttendancePort.saveAttendance(Attendance.checkIn(user))
+            return
         }
         if (ObjectUtils.isEmpty(attendance)) {
             throw AttendanceCheckOutException()

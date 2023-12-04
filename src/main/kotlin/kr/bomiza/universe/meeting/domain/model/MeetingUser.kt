@@ -19,11 +19,13 @@ class MeetingUser(
 ) : Base(id) {
 
     constructor(meeting: Meeting, user: User, state: MeetingUserState, joinTime: LocalTime, guest: Boolean) :
-            this(newInstance(), meeting, user, state, joinTime, guest, TimeUtils.currentTime())
+            this(newInstance(), meeting, user, state, joinTime, guest, TimeUtils.requestTime())
+
+    constructor(id: UUID, meeting: Meeting, user: User, state: MeetingUserState, joinTime: LocalTime, guest: Boolean) :
+            this(id, meeting, user, state, joinTime, guest, TimeUtils.requestTime())
 
     fun updateUserDate(user: User, joinTime: LocalTime, guest: Boolean) {
-        // todo: kotlin 문법 점검
-        if (!id.equals(user.id)) {
+        if (id != user.id) {
             throw InvalidAccessResourceException(id, user.id)
         }
         this.joinTime = joinTime
