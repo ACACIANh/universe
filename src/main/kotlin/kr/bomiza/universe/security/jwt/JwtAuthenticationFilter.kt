@@ -52,6 +52,7 @@ class JwtAuthenticationFilter(
 //            log.error("Failed to Path: ${request.servletPath}")
             log.error("Failed to authenticate user: ${ex.message}")
         } finally {
+            // todo: validation exception 발생시 스택트레이스 출력원인이 되는듯, 개선
             filterChain.doFilter(request, response)
         }
     }
