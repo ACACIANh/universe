@@ -9,7 +9,7 @@ import java.util.*
 @Table(name = "attendance")
 class AttendanceJpaEntity(
 
-    override var id: UUID,
+    id: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

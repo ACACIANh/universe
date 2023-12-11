@@ -6,11 +6,11 @@ import java.time.LocalTime
 import java.util.*
 
 class Meeting(
-    override val id: UUID,
+    id: UUID,
     var masterUser: User,
     var date: LocalDate,
     var capacityMember: Int,
-    var meetingUsers: MeetingUsers,
+    val meetingUsers: MeetingUsers,
 ) : Base(id) {
 
     constructor(masterUser: User, date: LocalDate, capacityMember: Int, meetingUsers: MeetingUsers) :

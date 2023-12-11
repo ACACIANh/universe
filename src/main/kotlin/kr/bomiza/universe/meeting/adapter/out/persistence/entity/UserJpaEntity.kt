@@ -12,7 +12,7 @@ import java.util.*
 @Entity
 @Table(name = "`user`")
 class UserJpaEntity(
-    override val id: UUID,
+    id: UUID,
 //    val email: String,
     var name: String,
 

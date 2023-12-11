@@ -11,7 +11,7 @@ import java.util.*
 @Table(name = "meeting_user")
 class MeetingUserJpaEntity(
 
-    override var id: UUID,
+    id: UUID,
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)

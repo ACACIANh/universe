@@ -6,7 +6,7 @@ import kr.bomiza.universe.security.domain.UserState
 import java.util.*
 
 class User(
-    override val id: UUID,
+    id: UUID,
     val name: String,
     var state: UserState,
     var role: UserRole,

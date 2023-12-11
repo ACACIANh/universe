@@ -85,7 +85,8 @@ class JwtProvider(
     }
 
     fun getToken(authorizationHeader: String): String {
-        val token = authorizationHeader.substring(7)
+        val prefix = "Bearer "
+        val token = authorizationHeader.substring(prefix.length)
 
         if (StringUtils.hasText(token))
             return token

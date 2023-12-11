@@ -6,9 +6,9 @@ import java.time.LocalDateTime
 import java.util.*
 
 class Attendance(
-    override val id: UUID,
-    var user: User,
-    var checkIn: LocalDateTime,
+    id: UUID,
+    val user: User,
+    val checkIn: LocalDateTime,
     var checkOut: LocalDateTime?,
 ) : Base(id) {
 

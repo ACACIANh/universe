@@ -12,7 +12,6 @@ import kr.bomiza.universe.meeting.domain.exception.ExistAttendanceCheckInExcepti
 import kr.bomiza.universe.meeting.domain.exception.NotFoundAttendanceException
 import kr.bomiza.universe.meeting.domain.model.Attendance
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.util.ObjectUtils
 import java.util.*
 
 @UseCase
@@ -25,25 +24,24 @@ class AttendanceService(
     FindAllAttendanceUseCase,
     FindLastAttendanceUseCase {
 
-    // todo: 이 메서드 검토
     @Transactional
     override fun attendance(userId: UUID, checkIn: Boolean) {
+        if (checkIn) this.attendanceCheckIn(userId) else this.attendanceCheckOut(userId)
+    }
 
-        val attendance = loadAttendancePort.findByUserIdAndCheckIn(userId)
+    private fun attendanceCheckIn(userId: UUID) {
+        loadAttendancePort.findByUserIdAndCheckIn(userId)?.also {
+            throw ExistAttendanceCheckInException(it.id.toString())
+        }
+        val user = loadUserPort.loadUser(userId)
+        saveAttendancePort.saveAttendance(Attendance.checkIn(user))
+    }
 
-        if (checkIn) {
-            if (!ObjectUtils.isEmpty(attendance)) {
-                throw ExistAttendanceCheckInException(attendance?.id.toString())
-            }
-            val user = loadUserPort.loadUser(userId)
-            saveAttendancePort.saveAttendance(Attendance.checkIn(user))
-            return
-        }
-        if (ObjectUtils.isEmpty(attendance)) {
-            throw AttendanceCheckOutException()
-        }
-        attendance!!.checkOut()
-        saveAttendancePort.saveAttendance(attendance)
+    private fun attendanceCheckOut(userId: UUID) {
+        loadAttendancePort.findByUserIdAndCheckIn(userId)?.apply {
+            this.checkOut()
+            saveAttendancePort.saveAttendance(this)
+        } ?: throw AttendanceCheckOutException()
     }
 
     override fun findLastAttendance(userId: UUID): Attendance {

@@ -9,13 +9,13 @@ import java.time.LocalTime
 import java.util.*
 
 class MeetingUser(
-    override val id: UUID,
-    var meeting: Meeting,
-    var user: User,
+    id: UUID,
+    val meeting: Meeting,
+    val user: User,
     var state: MeetingUserState,
     var joinTime: LocalTime,
     var guest: Boolean,
-    var createdDate: LocalDateTime,
+    val createdDate: LocalDateTime,
 ) : Base(id) {
 
     constructor(meeting: Meeting, user: User, state: MeetingUserState, joinTime: LocalTime, guest: Boolean) :
