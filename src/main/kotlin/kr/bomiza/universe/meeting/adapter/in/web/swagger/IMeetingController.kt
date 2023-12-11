@@ -47,5 +47,5 @@ interface IMeetingController {
     ): ResponseEntity<MeetingUsersResponseDto>
 
     @Operation(summary = "모든 정모 확인", description = "모든 정모 확인 설명")
-    fun findAllMeetings(@PageableDefault(size = 5) page: Pageable): ResponseEntity<Collection<MeetingResponseDto>>
+    fun findAllMeetings(page: Pageable): ResponseEntity<Collection<MeetingResponseDto>>
 }

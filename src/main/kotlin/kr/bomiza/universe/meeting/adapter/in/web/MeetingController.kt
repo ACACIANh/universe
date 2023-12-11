@@ -64,7 +64,7 @@ class MeetingController(
     }
 
     @GetMapping("/api/v1/meetings")
-    override fun findAllMeetings(@PageableDefault(size = 5) page: Pageable): ResponseEntity<Collection<MeetingResponseDto>> {
+    override fun findAllMeetings(page: Pageable): ResponseEntity<Collection<MeetingResponseDto>> {
 
         val meetings = findAllMeetingUseCase.findAll(page)
 

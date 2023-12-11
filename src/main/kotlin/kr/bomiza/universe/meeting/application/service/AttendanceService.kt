@@ -11,6 +11,7 @@ import kr.bomiza.universe.meeting.domain.exception.AttendanceCheckOutException
 import kr.bomiza.universe.meeting.domain.exception.ExistAttendanceCheckInException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundAttendanceException
 import kr.bomiza.universe.meeting.domain.model.Attendance
+import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
@@ -49,7 +50,7 @@ class AttendanceService(
             ?: throw NotFoundAttendanceException(userId.toString())
     }
 
-    override fun findAllAttendance(userId: UUID): List<Attendance> {
-        return loadAttendancePort.findALLByUserIdOrderByCreatedDateDesc(userId)
+    override fun findAllAttendance(userId: UUID, page: Pageable): List<Attendance> {
+        return loadAttendancePort.findALLByUserIdOrderByCreatedDateDesc(userId, page)
     }
 }

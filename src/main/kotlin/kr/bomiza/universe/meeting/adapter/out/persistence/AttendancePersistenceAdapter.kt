@@ -5,6 +5,7 @@ import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceRepos
 import kr.bomiza.universe.meeting.application.port.out.LoadAttendancePort
 import kr.bomiza.universe.meeting.application.port.out.SaveAttendancePort
 import kr.bomiza.universe.meeting.domain.model.Attendance
+import org.springframework.data.domain.Pageable
 import java.util.*
 
 
@@ -31,8 +32,8 @@ class AttendancePersistenceAdapter(
         }
     }
 
-    override fun findALLByUserIdOrderByCreatedDateDesc(userId: UUID): List<Attendance> {
-        return attendanceRepository.findALLByUserIdOrderByCreatedDateDesc(userId)
+    override fun findALLByUserIdOrderByCreatedDateDesc(userId: UUID, page: Pageable): List<Attendance> {
+        return attendanceRepository.findALLByUserIdOrderByCreatedDateDesc(userId, page)
             .map { meetingPersistenceMapper.mapToDomain(it) }
     }
 }

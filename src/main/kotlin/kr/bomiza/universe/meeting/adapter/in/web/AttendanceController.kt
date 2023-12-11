@@ -8,6 +8,7 @@ import kr.bomiza.universe.meeting.application.port.`in`.AttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.FindAllAttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.FindLastAttendanceUseCase
 import kr.bomiza.universe.security.domain.SecurityUser
+import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
@@ -47,10 +48,11 @@ class AttendanceController(
 
     @GetMapping("/api/v1/attendances")
     override fun findAllAttendance(
-        @AuthenticationPrincipal securityUser: SecurityUser
+        @AuthenticationPrincipal securityUser: SecurityUser,
+        page: Pageable
     ): ResponseEntity<List<AttendanceResponseDto>> {
 
-        val attendances = findAllAttendanceUseCase.findAllAttendance(securityUser.id)
+        val attendances = findAllAttendanceUseCase.findAllAttendance(securityUser.id, page)
         val attendancesResponseDto = attendanceMessageMapper.mapToDto(attendances)
         return ResponseEntity.ok(attendancesResponseDto)
     }
