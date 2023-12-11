@@ -3,7 +3,7 @@ package kr.bomiza.universe.meeting.application.service
 import kr.bomiza.universe.common.util.UserContextUtils
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto
 import kr.bomiza.universe.meeting.application.port.`in`.CreateMeetingUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindAllMeetingUseCase
+import kr.bomiza.universe.meeting.application.port.`in`.FindMeetingUseCase
 import kr.bomiza.universe.security.domain.Authorities
 import kr.bomiza.universe.security.domain.SecurityUser
 import org.assertj.core.api.Assertions
@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.domain.PageRequest
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 import java.util.*
@@ -22,7 +20,7 @@ import java.util.*
 @SpringBootTest
 class MeetingServiceTest(
     @Autowired val createMeetingUseCase: CreateMeetingUseCase,
-    @Autowired val findAllMeetingUseCase: FindAllMeetingUseCase,
+    @Autowired val findMeetingUseCase: FindMeetingUseCase,
 ) {
     companion object {
         @BeforeAll
@@ -52,9 +50,10 @@ class MeetingServiceTest(
 
         //when
         val pageRequest = PageRequest.of(0, pageSize)
-        val findAll = findAllMeetingUseCase.findAll(pageRequest)
+        val findAll = findMeetingUseCase.findAll(pageRequest)
 
         //then
         Assertions.assertThat(findAll.size).isEqualTo(inputDataSize)
+        Assertions.assertThat(findAll.first().date).isAfter(findAll.last().date)
     }
 }

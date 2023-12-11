@@ -12,4 +12,8 @@ abstract class Base(
             return UUIDUtils.generate()
         }
     }
+
+    fun idString() = id.toString()
+    fun equalsId(id: UUID) = this.id == id
+    fun equalsId(other: Base) = this.id == other.id
 }

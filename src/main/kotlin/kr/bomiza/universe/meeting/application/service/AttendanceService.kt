@@ -2,8 +2,7 @@ package kr.bomiza.universe.meeting.application.service
 
 import kr.bomiza.universe.common.annotation.UseCase
 import kr.bomiza.universe.meeting.application.port.`in`.AttendanceUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindAllAttendanceUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindLastAttendanceUseCase
+import kr.bomiza.universe.meeting.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.out.LoadAttendancePort
 import kr.bomiza.universe.meeting.application.port.out.LoadUserPort
 import kr.bomiza.universe.meeting.application.port.out.SaveAttendancePort
@@ -22,8 +21,7 @@ class AttendanceService(
     val saveAttendancePort: SaveAttendancePort,
     val loadAttendancePort: LoadAttendancePort,
 ) : AttendanceUseCase,
-    FindAllAttendanceUseCase,
-    FindLastAttendanceUseCase {
+    FindAttendanceUseCase {
 
     @Transactional
     override fun attendance(userId: UUID, checkIn: Boolean) {
@@ -31,7 +29,7 @@ class AttendanceService(
     }
 
     private fun attendanceCheckIn(userId: UUID) {
-        loadAttendancePort.findByUserIdAndCheckIn(userId)?.also {
+        loadAttendancePort.findByUserIdAndCheckIn(userId)?.let {
             throw ExistAttendanceCheckInException(it.id.toString())
         }
         val user = loadUserPort.loadUser(userId)
@@ -39,10 +37,11 @@ class AttendanceService(
     }
 
     private fun attendanceCheckOut(userId: UUID) {
-        loadAttendancePort.findByUserIdAndCheckIn(userId)?.apply {
-            this.checkOut()
-            saveAttendancePort.saveAttendance(this)
+        loadAttendancePort.findByUserIdAndCheckIn(userId)?.also {
+            it.checkOut()
+            saveAttendancePort.saveAttendance(it)
         } ?: throw AttendanceCheckOutException()
+        // 참여 완료에 대한 처리 필요
     }
 
     override fun findLastAttendance(userId: UUID): Attendance {
@@ -51,6 +50,6 @@ class AttendanceService(
     }
 
     override fun findAllAttendance(userId: UUID, page: Pageable): List<Attendance> {
-        return loadAttendancePort.findALLByUserIdOrderByCreatedDateDesc(userId, page)
+        return loadAttendancePort.findAllByUserIdOrderByCreatedDateDesc(userId, page)
     }
 }

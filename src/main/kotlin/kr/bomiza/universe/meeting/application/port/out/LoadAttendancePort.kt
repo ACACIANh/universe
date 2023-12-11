@@ -8,5 +8,5 @@ interface LoadAttendancePort {
 
     fun findByUserIdAndCheckIn(userId: UUID): Attendance?
     fun findFirstByUserIdOrderByCreatedDateDesc(userId: UUID): Attendance?
-    fun findALLByUserIdOrderByCreatedDateDesc(userId: UUID, page: Pageable): List<Attendance>
+    fun findAllByUserIdOrderByCreatedDateDesc(userId: UUID, page: Pageable): List<Attendance>
 }

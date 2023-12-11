@@ -32,8 +32,8 @@ class AttendancePersistenceAdapter(
         }
     }
 
-    override fun findALLByUserIdOrderByCreatedDateDesc(userId: UUID, page: Pageable): List<Attendance> {
-        return attendanceRepository.findALLByUserIdOrderByCreatedDateDesc(userId, page)
+    override fun findAllByUserIdOrderByCreatedDateDesc(userId: UUID, page: Pageable): List<Attendance> {
+        return attendanceRepository.findAllByUserIdOrderByCreatedDateDesc(userId, page)
             .map { meetingPersistenceMapper.mapToDomain(it) }
     }
 }

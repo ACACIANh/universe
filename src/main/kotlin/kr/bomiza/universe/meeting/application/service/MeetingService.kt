@@ -5,7 +5,7 @@ import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingCreateRe
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinRequestDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinUpdateRequestDto
 import kr.bomiza.universe.meeting.application.port.`in`.CreateMeetingUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindAllMeetingUseCase
+import kr.bomiza.universe.meeting.application.port.`in`.FindMeetingUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.JoinMeetingUseCase
 import kr.bomiza.universe.meeting.application.port.out.*
 import kr.bomiza.universe.meeting.domain.model.Meeting
@@ -26,7 +26,7 @@ class MeetingService(
     val saveMeetingUserPort: SaveMeetingUserPort,
 ) : CreateMeetingUseCase,
     JoinMeetingUseCase,
-    FindAllMeetingUseCase {
+    FindMeetingUseCase {
 
     @Transactional
     override fun createMeeting(userId: UUID, requestDto: MeetingCreateRequestDto): Meeting {

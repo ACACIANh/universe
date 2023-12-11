@@ -8,11 +8,10 @@ import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingRespons
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingUsersResponseDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.swagger.IMeetingController
 import kr.bomiza.universe.meeting.application.port.`in`.CreateMeetingUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindAllMeetingUseCase
+import kr.bomiza.universe.meeting.application.port.`in`.FindMeetingUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.JoinMeetingUseCase
 import kr.bomiza.universe.security.domain.SecurityUser
 import org.springframework.data.domain.Pageable
-import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
@@ -23,7 +22,7 @@ import java.util.*
 @RestController
 class MeetingController(
     val createMeetingUseCase: CreateMeetingUseCase,
-    val findAllMeetingUseCase: FindAllMeetingUseCase,
+    val findMeetingUseCase: FindMeetingUseCase,
     val joinMeetingUseCase: JoinMeetingUseCase,
     val meetingMessageMapper: MeetingMessageMapper,
 ) : IMeetingController {
@@ -66,7 +65,7 @@ class MeetingController(
     @GetMapping("/api/v1/meetings")
     override fun findAllMeetings(page: Pageable): ResponseEntity<Collection<MeetingResponseDto>> {
 
-        val meetings = findAllMeetingUseCase.findAll(page)
+        val meetings = findMeetingUseCase.findAll(page)
 
         return ResponseEntity.ok().body(meetings.map { meetingMessageMapper.mapToDto(it) })
     }

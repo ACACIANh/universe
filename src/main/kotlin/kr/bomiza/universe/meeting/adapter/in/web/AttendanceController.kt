@@ -5,8 +5,7 @@ import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.AttendanceReque
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.AttendanceResponseDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.swagger.IAttendanceController
 import kr.bomiza.universe.meeting.application.port.`in`.AttendanceUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindAllAttendanceUseCase
-import kr.bomiza.universe.meeting.application.port.`in`.FindLastAttendanceUseCase
+import kr.bomiza.universe.meeting.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.security.domain.SecurityUser
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -20,8 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AttendanceController(
     val attendanceUseCase: AttendanceUseCase,
-    val findAllAttendanceUseCase: FindAllAttendanceUseCase,
-    val findLastAttendanceUseCase: FindLastAttendanceUseCase,
+    val findAttendanceUseCase: FindAttendanceUseCase,
     val attendanceMessageMapper: AttendanceMessageMapper,
 ) : IAttendanceController {
 
@@ -32,7 +30,6 @@ class AttendanceController(
     ): ResponseEntity<Unit> {
 
         attendanceUseCase.attendance(securityUser.id, attendanceRequestDto.checkIn)
-
         return ResponseEntity.ok().build()
     }
 
@@ -41,7 +38,7 @@ class AttendanceController(
         @AuthenticationPrincipal securityUser: SecurityUser
     ): ResponseEntity<AttendanceResponseDto> {
 
-        val lastAttendance = findLastAttendanceUseCase.findLastAttendance(securityUser.id)
+        val lastAttendance = findAttendanceUseCase.findLastAttendance(securityUser.id)
         val attendanceResponseDto = attendanceMessageMapper.mapToDto(lastAttendance)
         return ResponseEntity.ok(attendanceResponseDto)
     }
@@ -52,7 +49,7 @@ class AttendanceController(
         page: Pageable
     ): ResponseEntity<List<AttendanceResponseDto>> {
 
-        val attendances = findAllAttendanceUseCase.findAllAttendance(securityUser.id, page)
+        val attendances = findAttendanceUseCase.findAllAttendance(securityUser.id, page)
         val attendancesResponseDto = attendanceMessageMapper.mapToDto(attendances)
         return ResponseEntity.ok(attendancesResponseDto)
     }

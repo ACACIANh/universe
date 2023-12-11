@@ -2,15 +2,13 @@ package kr.bomiza.universe.meeting.application.service
 
 import kr.bomiza.universe.common.Base
 import kr.bomiza.universe.common.util.UserContextUtils
-import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto
-import kr.bomiza.universe.meeting.application.port.`in`.FindAllAttendanceUseCase
+import kr.bomiza.universe.meeting.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.out.LoadUserPort
 import kr.bomiza.universe.meeting.application.port.out.SaveAttendancePort
 import kr.bomiza.universe.meeting.domain.model.Attendance
 import kr.bomiza.universe.security.domain.Authorities
 import kr.bomiza.universe.security.domain.SecurityUser
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +23,7 @@ import java.util.*
 class AttendanceServiceTest(
     @Autowired val loadUserPort: LoadUserPort,
     @Autowired val saveAttendancePort: SaveAttendancePort,
-    @Autowired val findAllAttendanceUseCase: FindAllAttendanceUseCase
+    @Autowired val findAttendanceUseCase: FindAttendanceUseCase
 ) {
     companion object {
         @BeforeAll
@@ -58,9 +56,10 @@ class AttendanceServiceTest(
 
         //when
         val pageRequest = PageRequest.of(0, pageSize)
-        val findAll = findAllAttendanceUseCase.findAllAttendance(currentUser.id, pageRequest)
+        val findAll = findAttendanceUseCase.findAllAttendance(currentUser.id, pageRequest)
 
         //then
         Assertions.assertThat(findAll.size).isEqualTo(inputDataSize)
+        Assertions.assertThat(findAll.first().checkIn).isAfter(findAll.last().checkIn)
     }
 }
