@@ -11,6 +11,7 @@ import kr.bomiza.universe.meeting.application.port.out.*
 import kr.bomiza.universe.meeting.domain.model.Meeting
 import kr.bomiza.universe.meeting.domain.model.MeetingUser
 import kr.bomiza.universe.meeting.domain.model.MeetingUsers
+import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
@@ -35,8 +36,8 @@ class MeetingService(
         return meeting
     }
 
-    override fun findAll(): Collection<Meeting> {
-        return loadMeetingPort.findAll()
+    override fun findAll(page: Pageable): Collection<Meeting> {
+        return loadMeetingPort.findAll(page)
     }
 
     @Transactional

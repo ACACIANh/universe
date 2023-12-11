@@ -10,6 +10,8 @@ import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinUpda
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingResponseDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingUsersResponseDto
 import kr.bomiza.universe.security.domain.SecurityUser
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -45,5 +47,5 @@ interface IMeetingController {
     ): ResponseEntity<MeetingUsersResponseDto>
 
     @Operation(summary = "모든 정모 확인", description = "모든 정모 확인 설명")
-    fun findAllMeetings(): ResponseEntity<Collection<MeetingResponseDto>>
+    fun findAllMeetings(@PageableDefault(size = 5) page: Pageable): ResponseEntity<Collection<MeetingResponseDto>>
 }

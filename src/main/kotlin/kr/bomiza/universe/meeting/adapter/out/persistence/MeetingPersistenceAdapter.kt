@@ -11,6 +11,7 @@ import kr.bomiza.universe.meeting.domain.exception.NotFoundMeetingException
 import kr.bomiza.universe.meeting.domain.exception.NotFoundMeetingUserException
 import kr.bomiza.universe.meeting.domain.model.Meeting
 import kr.bomiza.universe.meeting.domain.model.MeetingUser
+import org.springframework.data.domain.Pageable
 import java.util.*
 
 @PersistenceAdapter
@@ -24,8 +25,8 @@ class MeetingPersistenceAdapter(
     SaveMeetingPort,
     SaveMeetingUserPort {
 
-    override fun findAll(): List<Meeting> {
-        return meetingRepository.findAll()
+    override fun findAll(page: Pageable): List<Meeting> {
+        return meetingRepository.findAll(page).toList()
             .map { meetingPersistenceMapper.mapToDomain(it) }
     }
 

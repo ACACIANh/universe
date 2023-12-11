@@ -12,5 +12,11 @@ class UserContextUtils {
             val user = usernamePasswordAuthenticationToken.principal as? SecurityUser
             return user ?: throw IllegalArgumentException("User not found")
         }
+
+        fun setSecurityUser(securityUser: SecurityUser) {
+            SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(
+                securityUser, null, securityUser.authorities.toSimpleGrantedAuthorities()
+            )
+        }
     }
 }
