@@ -1,6 +1,6 @@
 package kr.bomiza.universe.business.security.oauth
 
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import kr.bomiza.universe.business.security.domain.UserOAuth
 import kr.bomiza.universe.business.security.web.SecurityUserRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService

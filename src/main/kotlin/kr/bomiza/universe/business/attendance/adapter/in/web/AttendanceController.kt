@@ -4,7 +4,7 @@ import kr.bomiza.universe.business.attendance.adapter.`in`.web.model.request.Att
 import kr.bomiza.universe.business.attendance.adapter.`in`.web.model.response.AttendanceResponseDto
 import kr.bomiza.universe.business.attendance.application.port.`in`.AttendanceUseCase
 import kr.bomiza.universe.business.attendance.application.port.`in`.FindAttendanceUseCase
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import kr.bomiza.universe.common.annotation.WebAdapter
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity

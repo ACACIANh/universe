@@ -1,9 +1,9 @@
 package kr.bomiza.universe.business.security.oauth
 
-import kr.bomiza.universe.business.security.domain.Authorities
-import kr.bomiza.universe.business.security.domain.Authority
-import kr.bomiza.universe.business.security.domain.OAuthUserContext
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.Authorities
+import kr.bomiza.universe.domain.security.enums.Authority
+import kr.bomiza.universe.domain.security.model.OAuthUserContext
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import kr.bomiza.universe.common.util.GsonUtils
 
 // todo: kakaoUserInfo 대신 상위모델로 공통화

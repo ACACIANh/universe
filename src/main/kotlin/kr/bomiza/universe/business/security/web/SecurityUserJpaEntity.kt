@@ -1,8 +1,8 @@
 package kr.bomiza.universe.business.security.web
 
 import jakarta.persistence.*
-import kr.bomiza.universe.business.security.domain.Authority
-import kr.bomiza.universe.business.security.domain.OAuthUserContext
+import kr.bomiza.universe.domain.security.enums.Authority
+import kr.bomiza.universe.domain.security.model.OAuthUserContext
 import kr.bomiza.universe.common.entity.UserEntity
 import kr.bomiza.universe.domain.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.UserRole

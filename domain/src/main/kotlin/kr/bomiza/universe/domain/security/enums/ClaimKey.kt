@@ -1,4 +1,4 @@
-package kr.bomiza.universe.business.security.domain
+package kr.bomiza.universe.domain.security.enums
 
 enum class ClaimKey {
 

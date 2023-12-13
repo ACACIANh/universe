@@ -8,7 +8,7 @@ import kr.bomiza.universe.business.meeting.adapter.`in`.web.model.response.Meeti
 import kr.bomiza.universe.business.meeting.application.port.`in`.CreateMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.`in`.FindMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.`in`.JoinMeetingUseCase
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import kr.bomiza.universe.common.annotation.WebAdapter
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity

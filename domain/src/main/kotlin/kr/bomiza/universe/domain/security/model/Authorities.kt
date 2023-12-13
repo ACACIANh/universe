@@ -1,7 +1,6 @@
-package kr.bomiza.universe.business.security.domain
+package kr.bomiza.universe.domain.security.model
 
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
+import kr.bomiza.universe.domain.security.enums.Authority
 
 class Authorities(
     val authorities: Set<Authority>
@@ -12,9 +11,5 @@ class Authorities(
 
     fun joinToString(): String {
         return authorities.joinToString()
-    }
-
-    fun toSimpleGrantedAuthorities(): Collection<GrantedAuthority> {
-        return authorities.map { SimpleGrantedAuthority(it.name) }
     }
 }

@@ -1,6 +1,6 @@
 package kr.bomiza.universe.business.security
 
-import kr.bomiza.universe.business.security.domain.Authority
+import kr.bomiza.universe.domain.security.enums.Authority
 import kr.bomiza.universe.business.security.jwt.JwtAuthenticationEntryPoint
 import kr.bomiza.universe.business.security.jwt.JwtAuthenticationFilter
 import kr.bomiza.universe.business.security.jwt.JwtProvider

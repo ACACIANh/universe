@@ -1,6 +1,5 @@
 package kr.bomiza.universe.domain.common.exception
 
-import kr.bomiza.universe.domain.common.exception.UniverseException
 import java.net.HttpURLConnection
 
 class NotFoundUserException(

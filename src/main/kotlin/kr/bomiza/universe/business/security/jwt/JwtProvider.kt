@@ -6,8 +6,8 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
-import kr.bomiza.universe.business.security.domain.Authorities
-import kr.bomiza.universe.business.security.domain.ClaimKey
+import kr.bomiza.universe.domain.security.model.Authorities
+import kr.bomiza.universe.domain.security.enums.ClaimKey
 import kr.bomiza.universe.business.security.domain.UserOAuth
 import kr.bomiza.universe.business.security.exception.NotExistAuthorizationHeader
 import kr.bomiza.universe.business.security.exception.NotExistToken

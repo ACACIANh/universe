@@ -4,8 +4,8 @@ import kr.bomiza.universe.common.util.UserContextUtils
 import kr.bomiza.universe.business.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto
 import kr.bomiza.universe.business.meeting.application.port.`in`.CreateMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.`in`.FindMeetingUseCase
-import kr.bomiza.universe.business.security.domain.Authorities
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.Authorities
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

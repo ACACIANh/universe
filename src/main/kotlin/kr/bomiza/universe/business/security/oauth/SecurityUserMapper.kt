@@ -1,8 +1,8 @@
 package kr.bomiza.universe.business.security.oauth
 
-import kr.bomiza.universe.business.security.domain.Authorities
-import kr.bomiza.universe.business.security.domain.OAuthUserContext
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.Authorities
+import kr.bomiza.universe.domain.security.model.OAuthUserContext
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import kr.bomiza.universe.business.security.web.SecurityUserJpaEntity
 import kr.bomiza.universe.domain.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.UserRole

@@ -1,7 +1,7 @@
 package kr.bomiza.universe.business.security.web
 
 import jakarta.transaction.Transactional
-import kr.bomiza.universe.business.security.domain.Authority
+import kr.bomiza.universe.domain.security.enums.Authority
 import org.springframework.stereotype.Service
 
 @Service

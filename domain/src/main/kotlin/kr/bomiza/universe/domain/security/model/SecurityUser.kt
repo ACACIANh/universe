@@ -1,4 +1,4 @@
-package kr.bomiza.universe.business.security.domain
+package kr.bomiza.universe.domain.security.model
 
 import kr.bomiza.universe.domain.common.model.Base
 import kr.bomiza.universe.domain.common.util.UUIDUtils

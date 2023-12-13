@@ -6,8 +6,8 @@ import kr.bomiza.universe.domain.attendance.model.Attendance
 import kr.bomiza.universe.business.attendance.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.business.attendance.application.port.out.LoadUserPort
 import kr.bomiza.universe.business.attendance.application.port.out.SaveAttendancePort
-import kr.bomiza.universe.business.security.domain.Authorities
-import kr.bomiza.universe.business.security.domain.SecurityUser
+import kr.bomiza.universe.domain.security.model.Authorities
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

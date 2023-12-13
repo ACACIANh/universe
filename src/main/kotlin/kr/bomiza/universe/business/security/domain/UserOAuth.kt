@@ -1,5 +1,7 @@
 package kr.bomiza.universe.business.security.domain
 
+import kr.bomiza.universe.domain.security.model.Authorities
+import kr.bomiza.universe.domain.security.model.SecurityUser
 import org.springframework.security.oauth2.core.user.OAuth2User
 import java.io.Serializable
 
