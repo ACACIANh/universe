@@ -1,6 +1,6 @@
 package kr.bomiza.universe.domain.meeting.model
 
-import kr.bomiza.universe.domain.common.Base
+import kr.bomiza.universe.domain.common.model.Base
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
 import kr.bomiza.universe.domain.meeting.exception.InvalidAccessResourceException
 import java.time.LocalDateTime

@@ -1,14 +1,14 @@
 package kr.bomiza.universe.meeting.domain.model
 
 import kr.bomiza.universe.common.enums.MDCKeys
-import kr.bomiza.universe.domain.common.UserState
+import kr.bomiza.universe.domain.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
 import kr.bomiza.universe.domain.meeting.enums.UserRole
 import kr.bomiza.universe.domain.meeting.exception.AlreadyJoinException
 import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUsers
 import kr.bomiza.universe.domain.meeting.model.User
-import kr.bomiza.universe.meeting.application.legacy.CAPACITY_MEMBER
+import kr.bomiza.universe.business.meeting.application.legacy.CAPACITY_MEMBER
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

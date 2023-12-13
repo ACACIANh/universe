@@ -1,6 +1,6 @@
 package kr.bomiza.universe.common.util
 
-import kr.bomiza.universe.security.domain.SecurityUser
+import kr.bomiza.universe.business.security.domain.SecurityUser
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 
