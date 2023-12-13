@@ -1,7 +1,7 @@
 package kr.bomiza.universe.meeting.domain.model
 
 import kr.bomiza.universe.common.enums.MDCKeys
-import kr.bomiza.universe.domain.common.enums.UserState
+import kr.bomiza.universe.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
 import kr.bomiza.universe.domain.meeting.enums.UserRole
 import kr.bomiza.universe.domain.meeting.exception.AlreadyJoinException

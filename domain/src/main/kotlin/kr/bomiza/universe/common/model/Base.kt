@@ -1,6 +1,6 @@
-package kr.bomiza.universe.domain.common.model
+package kr.bomiza.universe.common.model
 
-import kr.bomiza.universe.domain.common.util.UUIDUtils
+import kr.bomiza.universe.common.util.UUIDUtils
 import java.util.*
 
 abstract class Base(

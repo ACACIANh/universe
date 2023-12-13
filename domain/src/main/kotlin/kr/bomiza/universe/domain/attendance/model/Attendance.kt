@@ -1,6 +1,6 @@
 package kr.bomiza.universe.domain.attendance.model
 
-import kr.bomiza.universe.domain.common.model.Base
+import kr.bomiza.universe.common.model.Base
 import java.time.LocalDateTime
 import java.util.*
 

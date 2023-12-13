@@ -5,7 +5,7 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import kr.bomiza.universe.common.entity.UserEntity
-import kr.bomiza.universe.domain.common.enums.UserState
+import kr.bomiza.universe.common.enums.UserState
 import java.util.*
 
 @Entity(name = "UserJpaEntityAttendance")

@@ -2,7 +2,7 @@ package kr.bomiza.universe.meeting.adapter.out.persistence
 
 import kr.bomiza.universe.business.meeting.adapter.out.persistence.MeetingPersistenceMapper
 import kr.bomiza.universe.common.enums.MDCKeys
-import kr.bomiza.universe.domain.common.enums.UserState
+import kr.bomiza.universe.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
 import kr.bomiza.universe.domain.meeting.enums.UserRole
 import kr.bomiza.universe.domain.attendance.model.Attendance

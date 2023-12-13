@@ -1,6 +1,6 @@
 package kr.bomiza.universe.domain.attendance.exception
 
-import kr.bomiza.universe.domain.common.exception.UniverseException
+import kr.bomiza.universe.common.exception.UniverseException
 import java.net.HttpURLConnection
 
 class ExistAttendanceCheckInException(

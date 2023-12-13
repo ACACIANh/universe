@@ -1,6 +1,6 @@
 package kr.bomiza.universe.domain.meeting.model
 
-import kr.bomiza.universe.domain.common.model.Base
+import kr.bomiza.universe.common.model.Base
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*

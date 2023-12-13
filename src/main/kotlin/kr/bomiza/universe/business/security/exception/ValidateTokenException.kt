@@ -3,7 +3,7 @@ package kr.bomiza.universe.business.security.exception
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.MalformedJwtException
 import io.jsonwebtoken.UnsupportedJwtException
-import kr.bomiza.universe.domain.common.exception.UniverseException
+import kr.bomiza.universe.common.exception.UniverseException
 import org.springframework.http.HttpStatus
 import java.security.SignatureException
 

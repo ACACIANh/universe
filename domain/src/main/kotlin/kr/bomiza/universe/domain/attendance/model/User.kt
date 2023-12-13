@@ -1,7 +1,7 @@
 package kr.bomiza.universe.domain.attendance.model
 
-import kr.bomiza.universe.domain.common.enums.UserState
-import kr.bomiza.universe.domain.common.model.Base
+import kr.bomiza.universe.common.enums.UserState
+import kr.bomiza.universe.common.model.Base
 import java.util.*
 
 class User(

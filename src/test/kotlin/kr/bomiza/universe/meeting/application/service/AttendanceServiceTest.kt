@@ -1,7 +1,7 @@
 package kr.bomiza.universe.meeting.application.service
 
 import kr.bomiza.universe.common.util.UserContextUtils
-import kr.bomiza.universe.domain.common.model.Base
+import kr.bomiza.universe.common.model.Base
 import kr.bomiza.universe.domain.attendance.model.Attendance
 import kr.bomiza.universe.business.attendance.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.business.attendance.application.port.out.LoadUserPort

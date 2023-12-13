@@ -1,4 +1,4 @@
-package kr.bomiza.universe.domain.common.exception
+package kr.bomiza.universe.common.exception
 
 open class UniverseException(
     override val message: String,
