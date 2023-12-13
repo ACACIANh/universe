@@ -9,7 +9,7 @@ import kr.bomiza.universe.domain.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.UserRole
 import java.util.*
 
-@Entity
+@Entity(name = "UserJpaEntityMeeting")
 @Table(name = "`user`")
 class UserJpaEntity(
     id: UUID,

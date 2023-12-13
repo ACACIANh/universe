@@ -8,7 +8,7 @@ import kr.bomiza.universe.common.entity.UserEntity
 import kr.bomiza.universe.domain.common.enums.UserState
 import java.util.*
 
-@Entity
+@Entity(name = "UserJpaEntityAttendance")
 @Table(name = "`user`")
 class UserJpaEntity(
     id: UUID,

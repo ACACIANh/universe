@@ -7,13 +7,13 @@ import kr.bomiza.universe.domain.common.exception.NotFoundUserException
 import kr.bomiza.universe.domain.meeting.model.User
 import java.util.*
 
-@PersistenceAdapter
+@PersistenceAdapter(value = "UserPersistenceAdapterMeeting")
 class UserPersistenceAdapter(
     val userRepository: UserRepository,
     val meetingPersistenceMapper: MeetingPersistenceMapper
 ) : LoadUserPort {
 
-    //todo: 검증로직이 여기있는게 맞는지 검토
+    //todo: 검증로직이 여기있는게 맞는지 검토 // attendance 동일
     override fun loadUser(userId: UUID): User {
         val userEntity = userRepository.findById(userId)
             .orElseThrow { NotFoundUserException(userId.toString()) }

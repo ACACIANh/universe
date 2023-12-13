@@ -7,7 +7,7 @@ import kr.bomiza.universe.domain.attendance.model.User
 import kr.bomiza.universe.domain.common.exception.NotFoundUserException
 import java.util.*
 
-@PersistenceAdapter
+@PersistenceAdapter(value = "UserPersistenceAdapterAttendance")
 class UserPersistenceAdapter(
     val userRepository: UserRepository,
     val attendancePersistenceMapper: AttendancePersistenceMapper
