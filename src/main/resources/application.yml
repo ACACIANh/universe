@@ -23,6 +23,9 @@ spring:
         default-page-size: 10
         max-page-size: 100
 
+universe:
+  meeting:
+    capacity: 16
 #
 #spring:
 #  jackson:

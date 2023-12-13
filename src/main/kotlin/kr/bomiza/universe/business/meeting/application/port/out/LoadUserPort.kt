@@ -6,4 +6,5 @@ import java.util.*
 interface LoadUserPort {
 
     fun loadUser(userId: UUID): User
+    fun loadAdminUser(): User
 }

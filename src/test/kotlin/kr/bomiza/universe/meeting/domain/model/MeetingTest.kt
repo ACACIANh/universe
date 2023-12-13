@@ -8,7 +8,6 @@ import kr.bomiza.universe.domain.meeting.exception.AlreadyJoinException
 import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUsers
 import kr.bomiza.universe.domain.meeting.model.User
-import kr.bomiza.universe.business.meeting.application.legacy.CAPACITY_MEMBER
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -20,6 +19,7 @@ import java.util.stream.IntStream
 
 class MeetingTest {
 
+    private val CAPACITY_MEMBER: Int = 16
     private lateinit var adminUser: User
     private lateinit var meetingUsers: MeetingUsers
     private lateinit var meeting: Meeting

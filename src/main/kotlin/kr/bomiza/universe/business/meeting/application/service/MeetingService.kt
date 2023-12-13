@@ -8,10 +8,15 @@ import kr.bomiza.universe.business.meeting.application.port.`in`.FindMeetingUseC
 import kr.bomiza.universe.business.meeting.application.port.`in`.JoinMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.out.*
 import kr.bomiza.universe.common.annotation.UseCase
+import kr.bomiza.universe.configuration.UniverseProperties
 import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUser
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.util.*
 
 //todo: exception 발생 위치를, Service 에서 할지, PersistenceAdapter 에서 할지 고민, 일단 peersistence
@@ -23,6 +28,7 @@ class MeetingService(
     val loadMeetingUserPort: LoadMeetingUserPort,
     val saveMeetingPort: SaveMeetingPort,
     val saveMeetingUserPort: SaveMeetingUserPort,
+    val universeProperties: UniverseProperties,
 ) : CreateMeetingUseCase,
     JoinMeetingUseCase,
     FindMeetingUseCase {
@@ -57,5 +63,31 @@ class MeetingService(
         meetingUser.updateUserDate(user, requestDto.joinTime, requestDto.isGuest)
         saveMeetingUserPort.saveMeetingUser(meetingUser)
         return meetingUser
+    }
+
+    @Transactional
+    fun createWeekendMeetingOnMonday() {
+
+        var intervalDays: Int = (DayOfWeek.FRIDAY.value - DayOfWeek.MONDAY.value)
+
+        val friday = LocalDate.now().plusDays(intervalDays++.toLong())
+        val saturday = LocalDate.now().plusDays(intervalDays++.toLong())
+        val sunday = LocalDate.now().plusDays(intervalDays.toLong())
+
+        this.createMeetingOnAdmin(friday)
+        this.createMeetingOnAdmin(saturday)
+        this.createMeetingOnAdmin(sunday)
+    }
+
+    private fun createMeetingOnAdmin(createDate: LocalDate) {
+
+        val adminUser = loadUserPort.loadAdminUser();
+        val meeting = Meeting(adminUser, createDate, universeProperties.meeting.capacity)
+        saveMeetingPort.saveMeeting(meeting)
+        log.info("createMeetingOnAdmin success createdDate: $createDate")
+    }
+
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(MeetingService::class.java)
     }
 }

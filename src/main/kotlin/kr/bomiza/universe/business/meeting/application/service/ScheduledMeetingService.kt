@@ -1,4 +1,4 @@
-package kr.bomiza.universe.business.meeting.application.legacy
+package kr.bomiza.universe.business.meeting.application.service
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -11,7 +11,7 @@ const val EVERY_MONDAY = "0 0 12 ? * MON"
 
 @Service
 class ScheduledMeetingService(
-    val meetingService: MeetingServiceLegacy
+    val meetingService: MeetingService
 ) {
     /*** EVERY_SECOND
     @Scheduled(cron = EVERY_SECOND)
