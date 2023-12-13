@@ -2,7 +2,7 @@ package kr.bomiza.universe.meeting.application.port.`in`
 
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinRequestDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinUpdateRequestDto
-import kr.bomiza.universe.meeting.domain.model.MeetingUser
+import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import java.util.*
 
 interface JoinMeetingUseCase {

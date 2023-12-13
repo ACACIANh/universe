@@ -1,7 +1,7 @@
 package kr.bomiza.universe.meeting.adapter.`in`.web
 
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.AttendanceResponseDto
-import kr.bomiza.universe.meeting.domain.model.Attendance
+import kr.bomiza.universe.domain.meeting.model.Attendance
 import org.springframework.stereotype.Component
 
 @Component

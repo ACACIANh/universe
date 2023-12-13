@@ -3,7 +3,7 @@ package kr.bomiza.universe.security.exception
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.MalformedJwtException
 import io.jsonwebtoken.UnsupportedJwtException
-import kr.bomiza.universe.common.UniverseException
+import kr.bomiza.universe.domain.common.UniverseException
 import org.springframework.http.HttpStatus
 import java.security.SignatureException
 
@@ -11,7 +11,7 @@ class ValidateTokenException(
     val originException: Throwable
 ) : UniverseException(
     "Validate token",
-    HttpStatus.BAD_REQUEST,
+    HttpStatus.BAD_REQUEST.value(),
     thisExceptionMessage(originException),
     originException
 ) {

@@ -3,8 +3,8 @@ package kr.bomiza.universe.meeting.adapter.out.persistence
 import kr.bomiza.universe.common.annotation.PersistenceAdapter
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
 import kr.bomiza.universe.meeting.application.port.out.LoadUserPort
-import kr.bomiza.universe.meeting.domain.exception.NotFoundUserException
-import kr.bomiza.universe.meeting.domain.model.User
+import kr.bomiza.universe.domain.meeting.exception.NotFoundUserException
+import kr.bomiza.universe.domain.meeting.model.User
 import java.util.*
 
 @PersistenceAdapter

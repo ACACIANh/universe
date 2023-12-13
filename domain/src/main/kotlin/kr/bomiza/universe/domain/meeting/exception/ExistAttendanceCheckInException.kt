@@ -1,13 +1,13 @@
-package kr.bomiza.universe.meeting.domain.exception
+package kr.bomiza.universe.domain.meeting.exception
 
-import kr.bomiza.universe.common.UniverseException
-import org.springframework.http.HttpStatus
+import kr.bomiza.universe.domain.common.UniverseException
+import java.net.HttpURLConnection
 
 class ExistAttendanceCheckInException(
     private val attendanceId: String
 ) : UniverseException(
     "Exist Attendance CheckIn attendanceID : $attendanceId ",
-    HttpStatus.BAD_REQUEST,
+    HttpURLConnection.HTTP_BAD_REQUEST,
     null,
     null
 ) {

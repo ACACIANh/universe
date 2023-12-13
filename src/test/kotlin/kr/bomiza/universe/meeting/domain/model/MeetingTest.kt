@@ -1,11 +1,14 @@
 package kr.bomiza.universe.meeting.domain.model
 
 import kr.bomiza.universe.common.enums.MDCKeys
+import kr.bomiza.universe.domain.common.UserState
+import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
+import kr.bomiza.universe.domain.meeting.enums.UserRole
+import kr.bomiza.universe.domain.meeting.exception.AlreadyJoinException
+import kr.bomiza.universe.domain.meeting.model.Meeting
+import kr.bomiza.universe.domain.meeting.model.MeetingUsers
+import kr.bomiza.universe.domain.meeting.model.User
 import kr.bomiza.universe.meeting.application.legacy.CAPACITY_MEMBER
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
-import kr.bomiza.universe.meeting.domain.enums.UserRole
-import kr.bomiza.universe.meeting.domain.exception.AlreadyJoinException
-import kr.bomiza.universe.security.domain.UserState
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -26,8 +29,8 @@ class MeetingTest {
         MDC.put(MDCKeys.REQUEST_TIME.name, LocalDateTime.now().toString())
 
         adminUser = User("하동구", UserState.ACTIVATE, UserRole.ADMIN)
-        meetingUsers = MeetingUsers()
-        meeting = Meeting(adminUser, LocalDate.now(), CAPACITY_MEMBER, meetingUsers)
+        meetingUsers = MeetingUsers(CAPACITY_MEMBER)
+        meeting = Meeting(adminUser, LocalDate.now(), CAPACITY_MEMBER)
     }
 
     @Test
@@ -55,8 +58,9 @@ class MeetingTest {
         val isGuest = false
         val joinTime = LocalTime.now()
 
-        meetingUsers.join(meeting, joinMember, joinTime, isGuest)
         //when
+        meetingUsers.join(meeting, joinMember, joinTime, isGuest)
+
         //then
         Assertions.assertThatThrownBy {
             meetingUsers.join(meeting, joinMember, joinTime, isGuest)

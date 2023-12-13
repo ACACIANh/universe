@@ -1,6 +1,6 @@
 package kr.bomiza.universe.meeting.application.port.out
 
-import kr.bomiza.universe.meeting.domain.model.User
+import kr.bomiza.universe.domain.meeting.model.User
 import java.util.*
 
 interface LoadUserPort {

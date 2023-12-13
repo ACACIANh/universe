@@ -1,6 +1,6 @@
 package kr.bomiza.universe.meeting.application.port.out
 
-import kr.bomiza.universe.meeting.domain.model.Attendance
+import kr.bomiza.universe.domain.meeting.model.Attendance
 
 interface SaveAttendancePort {
 

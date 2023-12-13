@@ -1,11 +1,11 @@
 package kr.bomiza.universe.meeting.application.service
 
-import kr.bomiza.universe.common.Base
 import kr.bomiza.universe.common.util.UserContextUtils
+import kr.bomiza.universe.domain.common.Base
+import kr.bomiza.universe.domain.meeting.model.Attendance
 import kr.bomiza.universe.meeting.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.out.LoadUserPort
 import kr.bomiza.universe.meeting.application.port.out.SaveAttendancePort
-import kr.bomiza.universe.meeting.domain.model.Attendance
 import kr.bomiza.universe.security.domain.Authorities
 import kr.bomiza.universe.security.domain.SecurityUser
 import org.assertj.core.api.Assertions

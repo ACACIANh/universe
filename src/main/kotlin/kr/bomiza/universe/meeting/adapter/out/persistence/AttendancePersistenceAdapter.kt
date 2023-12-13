@@ -4,7 +4,7 @@ import kr.bomiza.universe.common.annotation.PersistenceAdapter
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceRepository
 import kr.bomiza.universe.meeting.application.port.out.LoadAttendancePort
 import kr.bomiza.universe.meeting.application.port.out.SaveAttendancePort
-import kr.bomiza.universe.meeting.domain.model.Attendance
+import kr.bomiza.universe.domain.meeting.model.Attendance
 import org.springframework.data.domain.Pageable
 import java.util.*
 

@@ -1,10 +1,10 @@
 package kr.bomiza.universe.meeting.adapter.out.persistence
 
+import kr.bomiza.universe.domain.meeting.model.*
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingUserJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
-import kr.bomiza.universe.meeting.domain.model.*
 import org.springframework.stereotype.Component
 
 // todo: 개선방법 생각해보기
@@ -28,15 +28,15 @@ class MeetingPersistenceMapper {
     }
 
     fun mapToDomain(entity: MeetingJpaEntity): Meeting {
-        return Meeting( entity.id, mapToDomain(entity.masterUser), entity.date, entity.capacityMember, MeetingUsers(entity.meetingUsers.map { mapToDomain(it) }.toMutableList()))
+        return Meeting( entity.id, mapToDomain(entity.masterUser), entity.date, MeetingUsers(entity.capacityMember, entity.meetingUsers.map { mapToDomain(it) }.toMutableList()))
     }
 
     fun mapToEntity(meeting: Meeting): MeetingJpaEntity {
-        return MeetingJpaEntity(meeting.id, mapToEntity(meeting.masterUser),meeting.date, meeting.capacityMember, meeting.meetingUsers.meetingUsers.map { mapToEntity(it) })
+        return MeetingJpaEntity(meeting.id, mapToEntity(meeting.masterUser),meeting.date, meeting.meetingUsers.capacity, meeting.meetingUsers.meetingUsers.map { mapToEntity(it) })
     }
 
     fun mapToDomain(entity: MeetingUserJpaEntity): MeetingUser {
-        return MeetingUser( entity.id, mapToDomain(entity.meeting), mapToDomain(entity.user), entity.state, entity.joinTime, entity.guest)
+        return MeetingUser( entity.id, mapToDomain(entity.meeting), mapToDomain(entity.user), entity.state, entity.joinTime, entity.guest, entity.createdDate)
     }
 
     fun mapToEntity(meetingUser: MeetingUser): MeetingUserJpaEntity {

@@ -1,4 +1,4 @@
-package kr.bomiza.universe.security.domain
+package kr.bomiza.universe.domain.common
 
 enum class UserState {
 

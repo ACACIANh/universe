@@ -3,7 +3,7 @@ package kr.bomiza.universe.meeting.adapter.out.persistence.entity
 import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 import kr.bomiza.universe.common.entity.BaseEntity
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
+import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
 import java.time.LocalTime
 import java.util.*
 

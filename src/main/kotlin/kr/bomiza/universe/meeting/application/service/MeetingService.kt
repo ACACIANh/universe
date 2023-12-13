@@ -1,6 +1,7 @@
 package kr.bomiza.universe.meeting.application.service
 
 import kr.bomiza.universe.common.annotation.UseCase
+import kr.bomiza.universe.common.util.TimeUtils
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinRequestDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.request.MeetingJoinUpdateRequestDto
@@ -8,9 +9,9 @@ import kr.bomiza.universe.meeting.application.port.`in`.CreateMeetingUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.FindMeetingUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.JoinMeetingUseCase
 import kr.bomiza.universe.meeting.application.port.out.*
-import kr.bomiza.universe.meeting.domain.model.Meeting
-import kr.bomiza.universe.meeting.domain.model.MeetingUser
-import kr.bomiza.universe.meeting.domain.model.MeetingUsers
+import kr.bomiza.universe.domain.meeting.model.Meeting
+import kr.bomiza.universe.domain.meeting.model.MeetingUser
+import kr.bomiza.universe.domain.meeting.model.MeetingUsers
 import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -31,7 +32,7 @@ class MeetingService(
     @Transactional
     override fun createMeeting(userId: UUID, requestDto: MeetingCreateRequestDto): Meeting {
         val user = loadUserPort.loadUser(userId)
-        val meeting = Meeting(user, requestDto.date, requestDto.capacityMember, MeetingUsers())
+        val meeting = Meeting(user, requestDto.date, requestDto.capacityMember)
         saveMeetingPort.saveMeeting(meeting)
         return meeting
     }

@@ -1,4 +1,5 @@
 rootProject.name = "universe"
+include(":domain")
 
 pluginManagement {
     val kotlinVersion: String by settings

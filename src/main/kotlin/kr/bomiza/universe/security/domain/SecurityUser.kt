@@ -1,7 +1,7 @@
 package kr.bomiza.universe.security.domain
 
-import kr.bomiza.universe.common.Base
-import kr.bomiza.universe.common.util.UUIDUtils
+import kr.bomiza.universe.domain.common.Base
+import kr.bomiza.universe.domain.common.UUIDUtils
 import java.util.*
 
 class SecurityUser(

@@ -1,8 +1,8 @@
-package kr.bomiza.universe.meeting.domain.model
+package kr.bomiza.universe.domain.meeting.model
 
-import kr.bomiza.universe.common.Base
-import kr.bomiza.universe.meeting.domain.enums.UserRole
-import kr.bomiza.universe.security.domain.UserState
+import kr.bomiza.universe.domain.common.Base
+import kr.bomiza.universe.domain.common.UserState
+import kr.bomiza.universe.domain.meeting.enums.UserRole
 import java.util.*
 
 class User(

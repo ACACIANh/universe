@@ -1,7 +1,7 @@
 package kr.bomiza.universe.common.web
 
 import kr.bomiza.universe.common.ExceptionResponse
-import kr.bomiza.universe.common.UniverseException
+import kr.bomiza.universe.domain.common.UniverseException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

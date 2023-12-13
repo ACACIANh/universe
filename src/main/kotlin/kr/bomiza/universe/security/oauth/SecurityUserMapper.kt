@@ -1,10 +1,10 @@
 package kr.bomiza.universe.security.oauth
 
-import kr.bomiza.universe.meeting.domain.enums.UserRole
+import kr.bomiza.universe.domain.meeting.enums.UserRole
 import kr.bomiza.universe.security.domain.Authorities
 import kr.bomiza.universe.security.domain.OAuthUserContext
 import kr.bomiza.universe.security.domain.SecurityUser
-import kr.bomiza.universe.security.domain.UserState
+import kr.bomiza.universe.domain.common.UserState
 import kr.bomiza.universe.security.web.SecurityUserJpaEntity
 
 class SecurityUserMapper {

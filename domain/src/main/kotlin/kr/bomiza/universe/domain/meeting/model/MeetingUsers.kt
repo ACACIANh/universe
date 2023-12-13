@@ -1,22 +1,21 @@
-package kr.bomiza.universe.meeting.domain.model
+package kr.bomiza.universe.domain.meeting.model
 
-import kr.bomiza.universe.meeting.application.legacy.CAPACITY_MEMBER
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
-import kr.bomiza.universe.meeting.domain.exception.AlreadyJoinException
+import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
+import kr.bomiza.universe.domain.meeting.exception.AlreadyJoinException
 import java.time.LocalTime
 
 class MeetingUsers(
-    val meetingUsers: MutableList<MeetingUser>
+    val capacity: Int,
+    val meetingUsers: MutableList<MeetingUser>,
 ) {
-    constructor() : this(ArrayList<MeetingUser>())
-    constructor(vararg meetingUsers: MeetingUser) : this(meetingUsers.toMutableList())
+    constructor(capacity: Int) : this(capacity, ArrayList<MeetingUser>())
 
     private val alreadyJoinCheck: (MeetingUser, User, Boolean) -> Boolean = { meetingUser, user, isGuest ->
         meetingUser.user.id == user.id && meetingUser.guest == isGuest
     }
 
     private fun stateCheck(): MeetingUserState {
-        return if (meetingUsers.size < CAPACITY_MEMBER) MeetingUserState.PARTICIPATION else MeetingUserState.WAITING
+        return if (meetingUsers.size < capacity) MeetingUserState.PARTICIPATION else MeetingUserState.WAITING
     }
 
     fun join(meeting: Meeting, user: User, joinTime: LocalTime, isGuest: Boolean): MeetingUser {
@@ -38,7 +37,7 @@ class MeetingUsers(
         meetingUsers
             .filter(shouldPromoteToParticipation)
             .sortedBy(MeetingUser::createdDate)
-            .take(CAPACITY_MEMBER)  // todo: 숫자 불일치 문제 해결 필요
+            .take(capacity)
             .filter { it.state == MeetingUserState.WAITING }
             .forEach { it.state = MeetingUserState.PARTICIPATION }
     }

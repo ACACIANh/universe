@@ -1,10 +1,8 @@
-package kr.bomiza.universe.common
-
-import org.springframework.http.HttpStatus
+package kr.bomiza.universe.domain.common
 
 open class UniverseException(
     override val message: String,
-    val status: HttpStatus,
+    val status: Int,
     val exceptionMessage: String?,
     val originThrowable: Throwable?
 ) : RuntimeException() {

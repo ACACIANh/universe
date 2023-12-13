@@ -2,8 +2,8 @@ package kr.bomiza.universe.meeting.adapter.`in`.web
 
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingResponseDto
 import kr.bomiza.universe.meeting.adapter.`in`.web.model.response.MeetingUsersResponseDto
-import kr.bomiza.universe.meeting.domain.model.Meeting
-import kr.bomiza.universe.meeting.domain.model.MeetingUser
+import kr.bomiza.universe.domain.meeting.model.Meeting
+import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import org.springframework.stereotype.Component
 
 @Component
@@ -14,7 +14,7 @@ class MeetingMessageMapper {
         return MeetingResponseDto(
             meeting.id,
             meeting.date,
-            meeting.capacityMember,
+            meeting.meetingUsers.capacity,
             meeting.meetingUsers.meetingUsers.map { mapToDto(it) })
     }
 

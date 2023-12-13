@@ -3,7 +3,7 @@ package kr.bomiza.universe.meeting.adapter.`in`.web.model.response
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.v3.oas.annotations.media.Schema
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingUserJpaEntity
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
+import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
 import java.time.LocalTime
 import java.util.*
 

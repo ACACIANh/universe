@@ -7,10 +7,10 @@ import kr.bomiza.universe.meeting.application.port.out.LoadMeetingPort
 import kr.bomiza.universe.meeting.application.port.out.LoadMeetingUserPort
 import kr.bomiza.universe.meeting.application.port.out.SaveMeetingPort
 import kr.bomiza.universe.meeting.application.port.out.SaveMeetingUserPort
-import kr.bomiza.universe.meeting.domain.exception.NotFoundMeetingException
-import kr.bomiza.universe.meeting.domain.exception.NotFoundMeetingUserException
-import kr.bomiza.universe.meeting.domain.model.Meeting
-import kr.bomiza.universe.meeting.domain.model.MeetingUser
+import kr.bomiza.universe.domain.meeting.exception.NotFoundMeetingException
+import kr.bomiza.universe.domain.meeting.exception.NotFoundMeetingUserException
+import kr.bomiza.universe.domain.meeting.model.Meeting
+import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import java.util.*

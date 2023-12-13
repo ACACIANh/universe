@@ -1,15 +1,16 @@
 package kr.bomiza.universe.meeting.application.service
 
 import kr.bomiza.universe.common.annotation.UseCase
+import kr.bomiza.universe.common.util.TimeUtils
 import kr.bomiza.universe.meeting.application.port.`in`.AttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.`in`.FindAttendanceUseCase
 import kr.bomiza.universe.meeting.application.port.out.LoadAttendancePort
 import kr.bomiza.universe.meeting.application.port.out.LoadUserPort
 import kr.bomiza.universe.meeting.application.port.out.SaveAttendancePort
-import kr.bomiza.universe.meeting.domain.exception.AttendanceCheckOutException
-import kr.bomiza.universe.meeting.domain.exception.ExistAttendanceCheckInException
-import kr.bomiza.universe.meeting.domain.exception.NotFoundAttendanceException
-import kr.bomiza.universe.meeting.domain.model.Attendance
+import kr.bomiza.universe.domain.meeting.exception.AttendanceCheckOutException
+import kr.bomiza.universe.domain.meeting.exception.ExistAttendanceCheckInException
+import kr.bomiza.universe.domain.meeting.exception.NotFoundAttendanceException
+import kr.bomiza.universe.domain.meeting.model.Attendance
 import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -33,12 +34,12 @@ class AttendanceService(
             throw ExistAttendanceCheckInException(it.id.toString())
         }
         val user = loadUserPort.loadUser(userId)
-        saveAttendancePort.saveAttendance(Attendance.checkIn(user))
+        saveAttendancePort.saveAttendance(Attendance.checkIn(user, TimeUtils.requestTime()))
     }
 
     private fun attendanceCheckOut(userId: UUID) {
         loadAttendancePort.findByUserIdAndCheckIn(userId)?.also {
-            it.checkOut()
+            it.checkOut(TimeUtils.requestTime())
             saveAttendancePort.saveAttendance(it)
         } ?: throw AttendanceCheckOutException()
         // 참여 완료에 대한 처리 필요

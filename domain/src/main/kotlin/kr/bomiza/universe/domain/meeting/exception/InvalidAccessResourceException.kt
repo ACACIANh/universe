@@ -1,7 +1,7 @@
-package kr.bomiza.universe.meeting.domain.exception
+package kr.bomiza.universe.domain.meeting.exception
 
-import kr.bomiza.universe.common.UniverseException
-import org.springframework.http.HttpStatus
+import kr.bomiza.universe.domain.common.UniverseException
+import java.net.HttpURLConnection
 import java.util.*
 
 class InvalidAccessResourceException(
@@ -9,7 +9,7 @@ class InvalidAccessResourceException(
     private val userId: UUID,
 ) : UniverseException(
     "Invalid access - resource ownerId : $ownerId, access userId : $userId",
-    HttpStatus.UNAUTHORIZED,
+    HttpURLConnection.HTTP_UNAUTHORIZED,
     null,
     null
 ) {

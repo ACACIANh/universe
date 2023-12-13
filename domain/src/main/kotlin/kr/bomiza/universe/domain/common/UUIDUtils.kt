@@ -1,4 +1,4 @@
-package kr.bomiza.universe.common.util
+package kr.bomiza.universe.domain.common
 
 import java.util.*
 

@@ -2,8 +2,8 @@ package kr.bomiza.universe.meeting.application.legacy
 
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingRepository
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserRepository
-import kr.bomiza.universe.meeting.domain.enums.UserRole
-import kr.bomiza.universe.meeting.domain.exception.NotFoundAdminUserException
+import kr.bomiza.universe.domain.meeting.enums.UserRole
+import kr.bomiza.universe.domain.meeting.exception.NotFoundAdminUserException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

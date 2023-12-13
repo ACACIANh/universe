@@ -1,4 +1,4 @@
-package kr.bomiza.universe.meeting.domain.enums
+package kr.bomiza.universe.domain.meeting.enums
 
 enum class MeetingUserState {
 

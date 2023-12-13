@@ -1,14 +1,17 @@
 package kr.bomiza.universe.meeting.adapter.out.persistence
 
 import kr.bomiza.universe.common.enums.MDCKeys
+import kr.bomiza.universe.domain.common.UserState
+import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
+import kr.bomiza.universe.domain.meeting.enums.UserRole
+import kr.bomiza.universe.domain.meeting.model.Attendance
+import kr.bomiza.universe.domain.meeting.model.Meeting
+import kr.bomiza.universe.domain.meeting.model.MeetingUser
+import kr.bomiza.universe.domain.meeting.model.User
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.AttendanceJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.MeetingUserJpaEntity
 import kr.bomiza.universe.meeting.adapter.out.persistence.entity.UserJpaEntity
-import kr.bomiza.universe.meeting.domain.enums.MeetingUserState
-import kr.bomiza.universe.meeting.domain.enums.UserRole
-import kr.bomiza.universe.meeting.domain.model.*
-import kr.bomiza.universe.security.domain.UserState
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -106,7 +109,7 @@ class MeetingPersistenceMapperTest {
         Assertions.assertThat(meetingEntity.id).isEqualTo(meeting.id)
         Assertions.assertThat(meetingEntity.masterUser.id).isEqualTo(meeting.masterUser.id)
         Assertions.assertThat(meetingEntity.date).isEqualTo(meeting.date)
-        Assertions.assertThat(meetingEntity.capacityMember).isEqualTo(meeting.capacityMember)
+        Assertions.assertThat(meetingEntity.capacityMember).isEqualTo(meeting.meetingUsers.capacity)
         Assertions.assertThat(meetingEntity.meetingUsers.size).isEqualTo(meeting.meetingUsers.meetingUsers.size)
     }
 
@@ -114,9 +117,7 @@ class MeetingPersistenceMapperTest {
     fun 미팅ToEntity() {
         //given
         val user = User(UUID.randomUUID(), "User1", UserState.ACTIVATE, UserRole.MEMBER)
-        val meeting = Meeting(
-            UUID.randomUUID(), user, LocalDate.now(), 10, MeetingUsers()
-        )
+        val meeting = Meeting(user, LocalDate.now(), 10)
 
         // when
         val meetingEntity = meetingPersistenceMapper.mapToEntity(meeting)
@@ -125,7 +126,7 @@ class MeetingPersistenceMapperTest {
         Assertions.assertThat(meeting.id).isEqualTo(meetingEntity.id)
         Assertions.assertThat(meeting.masterUser.id).isEqualTo(meetingEntity.masterUser.id)
         Assertions.assertThat(meeting.date).isEqualTo(meetingEntity.date)
-        Assertions.assertThat(meeting.capacityMember).isEqualTo(meetingEntity.capacityMember)
+        Assertions.assertThat(meeting.meetingUsers.capacity).isEqualTo(meetingEntity.capacityMember)
         Assertions.assertThat(meeting.meetingUsers.meetingUsers.size).isEqualTo(meetingEntity.meetingUsers.size)
     }
 
@@ -144,7 +145,9 @@ class MeetingPersistenceMapperTest {
             MeetingUserState.PARTICIPATION,
             LocalTime.now(),
             false
-        )
+        ).also {
+            it.createdDate = LocalDateTime.now()
+        }
 
         // when
         val meetingUser = meetingPersistenceMapper.mapToDomain(meetingUserEntity)
@@ -162,7 +165,7 @@ class MeetingPersistenceMapperTest {
     fun 미팅유저ToEntity() {
         //given
         val user = User(UUID.randomUUID(), "User1", UserState.ACTIVATE, UserRole.MEMBER)
-        val meeting = Meeting(UUID.randomUUID(), user, LocalDate.now(), 10, MeetingUsers())
+        val meeting = Meeting(user, LocalDate.now(), 10)
         val meetingUser =
             MeetingUser(
                 UUID.randomUUID(),
@@ -171,7 +174,7 @@ class MeetingPersistenceMapperTest {
                 MeetingUserState.PARTICIPATION,
                 LocalTime.now(),
                 false,
-                LocalDateTime.now()
+                LocalDateTime.now(),
             )
 
         // when
