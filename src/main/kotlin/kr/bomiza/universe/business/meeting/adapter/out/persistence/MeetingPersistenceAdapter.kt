@@ -12,6 +12,7 @@ import kr.bomiza.universe.domain.meeting.exception.NotFoundMeetingUserException
 import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import org.springframework.data.domain.Pageable
+import java.time.LocalDate
 import java.util.*
 
 @PersistenceAdapter
@@ -34,6 +35,12 @@ class MeetingPersistenceAdapter(
         val entity = meetingRepository.findById(meetingId)
             .orElseThrow { NotFoundMeetingException(meetingId.toString()) }
         return meetingPersistenceMapper.mapToDomain(entity)
+    }
+
+    override fun loadMeeting(localDate: LocalDate): Meeting? {
+        return meetingRepository.findByDate(localDate)?.let {
+            meetingPersistenceMapper.mapToDomain(it)
+        }
     }
 
     override fun loadMeetingUser(meetingUserId: UUID): MeetingUser {

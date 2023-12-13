@@ -16,6 +16,5 @@ class MeetingCreateRequestDto(
     @param:JsonProperty("capacityMember")
     @Schema(description = "정모인원", example = "16")
     val capacityMember: Int,
-
-    ) {
+) {
 }

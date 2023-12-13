@@ -4,6 +4,7 @@ import kr.bomiza.universe.common.util.UserContextUtils
 import kr.bomiza.universe.business.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto
 import kr.bomiza.universe.business.meeting.application.port.`in`.CreateMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.`in`.FindMeetingUseCase
+import kr.bomiza.universe.domain.meeting.exception.ExistMeetingException
 import kr.bomiza.universe.domain.security.model.Authorities
 import kr.bomiza.universe.domain.security.model.SecurityUser
 import org.assertj.core.api.Assertions
@@ -55,5 +56,23 @@ class MeetingServiceTest(
         //then
         Assertions.assertThat(findAll.size).isEqualTo(inputDataSize)
         Assertions.assertThat(findAll.first().date).isAfter(findAll.last().date)
+    }
+
+    @Test
+    @Transactional
+    fun 이미존재하는정모() {
+        //given
+        val currentUser = UserContextUtils.getCurrentUser()
+
+        val date = LocalDate.of(2023, 12, 1)
+        val meetingCreateRequestDto = MeetingCreateRequestDto(date, 16)
+        createMeetingUseCase.createMeeting(currentUser.id, meetingCreateRequestDto)
+
+        //when
+
+        //then
+        Assertions.assertThatThrownBy {
+            createMeetingUseCase.createMeeting(currentUser.id, meetingCreateRequestDto)
+        }.isInstanceOf(ExistMeetingException::class.java)
     }
 }

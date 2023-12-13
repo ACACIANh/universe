@@ -9,6 +9,7 @@ import kr.bomiza.universe.business.meeting.application.port.`in`.JoinMeetingUseC
 import kr.bomiza.universe.business.meeting.application.port.out.*
 import kr.bomiza.universe.common.annotation.UseCase
 import kr.bomiza.universe.configuration.UniverseProperties
+import kr.bomiza.universe.domain.meeting.exception.ExistMeetingException
 import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import org.slf4j.Logger
@@ -35,6 +36,9 @@ class MeetingService(
 
     @Transactional
     override fun createMeeting(userId: UUID, requestDto: MeetingCreateRequestDto): Meeting {
+        loadMeetingPort.loadMeeting(requestDto.date)?.let {
+            throw ExistMeetingException(it.idString())
+        }
         val user = loadUserPort.loadUser(userId)
         val meeting = Meeting(user, requestDto.date, requestDto.capacityMember)
         saveMeetingPort.saveMeeting(meeting)
@@ -80,7 +84,10 @@ class MeetingService(
     }
 
     private fun createMeetingOnAdmin(createDate: LocalDate) {
-
+        // todo: 개선 포인트 -> usecase 랑 통합시 user 의 두번 조회 이슈, 비통합시 중복코드
+        loadMeetingPort.loadMeeting(createDate)?.let {
+            throw ExistMeetingException(it.idString())
+        }
         val adminUser = loadUserPort.loadAdminUser();
         val meeting = Meeting(adminUser, createDate, universeProperties.meeting.capacity)
         saveMeetingPort.saveMeeting(meeting)
