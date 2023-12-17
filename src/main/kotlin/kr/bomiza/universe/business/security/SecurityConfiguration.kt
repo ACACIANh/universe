@@ -65,6 +65,8 @@ class SecurityConfiguration(
                     .permitAll()
                     .requestMatchers(MvcRequestMatcher.Builder(introspector).pattern("/api/v1/**"))
                     .hasAnyAuthority(Authority.MEMBER.name, Authority.ADMIN.name)
+                    .requestMatchers(MvcRequestMatcher.Builder(introspector).pattern("/api/admin/v1/**"))
+                    .hasAnyAuthority(Authority.ADMIN.name)
                     .anyRequest()
                     .authenticated()
             }

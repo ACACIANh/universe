@@ -20,14 +20,14 @@ class UserController(
     val inactiveUserUseCase: InactiveUserUseCase,
 ) : IUserController {
 
-    @GetMapping("/api/v1/admin/users")
+    @GetMapping("/api/admin/v1/users")
     override fun findAllAttendance(page: Pageable): ResponseEntity<List<UserResponseDto>> {
         val users = findUserUseCase.findAllUser(page)
         val responseDto = userMessageMapper.mapToDto(users)
         return ResponseEntity.ok(responseDto)
     }
 
-    @PostMapping("/api/v1/admin/users/{userId}")
+    @PostMapping("/api/admin/v1/users/{userId}")
     override fun inactiveUser(
         @PathVariable userId: UUID,
     ): ResponseEntity<UserResponseDto> {

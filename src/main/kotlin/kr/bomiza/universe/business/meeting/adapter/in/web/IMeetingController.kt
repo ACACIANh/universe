@@ -22,7 +22,6 @@ import java.util.*
 @SecurityRequirement(name = "Authorization")
 interface IMeetingController {
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "정모 생성", description = "정모생성 설명")
     fun createMeeting(
         @AuthenticationPrincipal securityUser: SecurityUser,

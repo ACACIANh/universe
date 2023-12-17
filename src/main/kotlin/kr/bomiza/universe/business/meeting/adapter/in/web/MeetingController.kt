@@ -26,7 +26,7 @@ class MeetingController(
     val meetingMessageMapper: MeetingMessageMapper,
 ) : IMeetingController {
 
-    @PostMapping("/api/v1/meetings")
+    @PostMapping("/api/admin/v1/meetings")
     override fun createMeeting(
         @AuthenticationPrincipal securityUser: SecurityUser,
         @RequestBody requestDto: MeetingCreateRequestDto
