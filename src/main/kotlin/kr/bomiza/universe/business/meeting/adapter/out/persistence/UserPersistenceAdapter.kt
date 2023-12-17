@@ -4,7 +4,7 @@ import kr.bomiza.universe.business.meeting.adapter.out.persistence.entity.UserRe
 import kr.bomiza.universe.business.meeting.application.port.out.LoadUserPort
 import kr.bomiza.universe.common.annotation.PersistenceAdapter
 import kr.bomiza.universe.common.exception.NotFoundUserException
-import kr.bomiza.universe.domain.meeting.enums.UserRole
+import kr.bomiza.universe.common.enums.UserRole
 import kr.bomiza.universe.domain.meeting.exception.NotFoundAdminUserException
 import kr.bomiza.universe.domain.meeting.model.User
 import java.util.*

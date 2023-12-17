@@ -1,9 +1,9 @@
-package kr.bomiza.universe.domain.meeting.model
+package kr.bomiza.universe.domain.user.model
 
 import kr.bomiza.universe.common.enums.UserState
 import kr.bomiza.universe.common.model.Base
 import kr.bomiza.universe.common.enums.UserRole
-import java.util.*
+import java.util.UUID
 
 class User(
     id: UUID,
@@ -12,4 +12,8 @@ class User(
     var role: UserRole,
 ) : Base(id) {
     constructor(name: String, state: UserState, role: UserRole) : this(newInstance(), name, state, role)
+
+    fun inactive() {
+        state = UserState.INACTIVATE
+    }
 }

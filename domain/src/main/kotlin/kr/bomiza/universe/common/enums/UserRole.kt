@@ -1,4 +1,4 @@
-package kr.bomiza.universe.domain.meeting.enums
+package kr.bomiza.universe.common.enums
 
 enum class UserRole {
 

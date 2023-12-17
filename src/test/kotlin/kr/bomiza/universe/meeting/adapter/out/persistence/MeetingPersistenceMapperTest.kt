@@ -4,8 +4,7 @@ import kr.bomiza.universe.business.meeting.adapter.out.persistence.MeetingPersis
 import kr.bomiza.universe.common.enums.MDCKeys
 import kr.bomiza.universe.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
-import kr.bomiza.universe.domain.meeting.enums.UserRole
-import kr.bomiza.universe.domain.attendance.model.Attendance
+import kr.bomiza.universe.common.enums.UserRole
 import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import kr.bomiza.universe.domain.meeting.model.User

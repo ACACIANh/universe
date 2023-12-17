@@ -5,7 +5,7 @@ import kr.bomiza.universe.domain.security.model.OAuthUserContext
 import kr.bomiza.universe.domain.security.model.SecurityUser
 import kr.bomiza.universe.business.security.web.SecurityUserJpaEntity
 import kr.bomiza.universe.common.enums.UserState
-import kr.bomiza.universe.domain.meeting.enums.UserRole
+import kr.bomiza.universe.common.enums.UserRole
 
 class SecurityUserMapper {
 
