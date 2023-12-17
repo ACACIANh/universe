@@ -1,6 +1,5 @@
-package kr.bomiza.universe.meeting.adapter.out.persistence
+package kr.bomiza.universe.business.meeting.adapter.out.persistence
 
-import kr.bomiza.universe.business.meeting.adapter.out.persistence.MeetingPersistenceMapper
 import kr.bomiza.universe.common.enums.MDCKeys
 import kr.bomiza.universe.common.enums.UserState
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
@@ -140,7 +139,7 @@ class MeetingPersistenceMapperTest {
         val userEntity = UserJpaEntity(UUID.randomUUID(), "User1", UserState.ACTIVATE, UserRole.MEMBER)
         val meetingUserEntity = MeetingUserJpaEntity(
             UUID.randomUUID(),
-            meetingEntity,
+            meetingEntity.id,
             userEntity,
             MeetingUserState.PARTICIPATION,
             LocalTime.now(),
@@ -154,7 +153,7 @@ class MeetingPersistenceMapperTest {
 
         // then
         Assertions.assertThat(meetingUserEntity.id).isEqualTo(meetingUser.id)
-        Assertions.assertThat(meetingUserEntity.meeting.id).isEqualTo(meetingUser.meeting.id)
+        Assertions.assertThat(meetingUserEntity.meetingId).isEqualTo(meetingUser.meetingId)
         Assertions.assertThat(meetingUserEntity.user.id).isEqualTo(meetingUser.user.id)
         Assertions.assertThat(meetingUserEntity.state).isEqualTo(meetingUser.state)
         Assertions.assertThat(meetingUserEntity.joinTime).isEqualTo(meetingUser.joinTime)
@@ -169,7 +168,7 @@ class MeetingPersistenceMapperTest {
         val meetingUser =
             MeetingUser(
                 UUID.randomUUID(),
-                meeting,
+                meeting.id,
                 user,
                 MeetingUserState.PARTICIPATION,
                 LocalTime.now(),
@@ -182,7 +181,7 @@ class MeetingPersistenceMapperTest {
 
         // then
         Assertions.assertThat(meetingUser.id).isEqualTo(meetingUserEntity.id)
-        Assertions.assertThat(meetingUser.meeting.id).isEqualTo(meetingUserEntity.meeting.id)
+        Assertions.assertThat(meetingUser.meetingId).isEqualTo(meetingUserEntity.meetingId)
         Assertions.assertThat(meetingUser.user.id).isEqualTo(meetingUserEntity.user.id)
         Assertions.assertThat(meetingUser.state).isEqualTo(meetingUserEntity.state)
         Assertions.assertThat(meetingUser.joinTime).isEqualTo(meetingUserEntity.joinTime)

@@ -3,6 +3,8 @@ package kr.bomiza.universe.business.meeting.adapter.out.persistence.entity
 import jakarta.persistence.*
 import kr.bomiza.universe.common.entity.BaseEntity
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
+import org.springframework.data.annotation.CreatedDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.*
 
@@ -25,6 +27,9 @@ class MeetingUserJpaEntity(
     var joinTime: LocalTime,
 
     var guest: Boolean,
+
+    @CreatedDate
+    override var createdDate: LocalDateTime?,
 
     ) : BaseEntity(id) {
 

@@ -15,6 +15,7 @@ pluginManagement {
         kotlin("plugin.jpa") version kotlinVersion
         kotlin("plugin.allopen") version kotlinVersion
         kotlin("plugin.noarg") version kotlinVersion
+//        kotlin("plugin.kapt") version kotlinVersion
         // 플러그인 추가시 같이 추가
     }
 }

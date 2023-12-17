@@ -15,11 +15,9 @@ abstract class BaseEntity(
     @Id
     val id: UUID
 ) {
-
     @CreatedDate
-    lateinit var createdDate: LocalDateTime
+    var createdDate: LocalDateTime? = null
 
     @LastModifiedDate
-    lateinit var modifiedDate: LocalDateTime
-
+    var modifiedDate: LocalDateTime? = null
 }

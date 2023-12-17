@@ -13,6 +13,7 @@ import kr.bomiza.universe.domain.meeting.model.Meeting
 import kr.bomiza.universe.domain.meeting.model.MeetingUser
 import org.springframework.data.domain.Pageable
 import java.time.LocalDate
+import java.time.LocalTime
 import java.util.*
 
 @PersistenceAdapter
@@ -49,6 +50,11 @@ class MeetingPersistenceAdapter(
         return meetingPersistenceMapper.mapToDomain(entity)
     }
 
+    override fun loadMeetingUserByUserIdAndDate(userId: UUID, localDate: LocalDate): List<MeetingUser> {
+        return meetingUserRepository.findByUserIdAndDate(userId, localDate)
+            .map { meetingPersistenceMapper.mapToDomain(it) }
+    }
+
     override fun saveMeeting(meeting: Meeting) {
         val entity = meetingPersistenceMapper.mapToEntity(meeting)
         meetingRepository.save(entity)
@@ -57,5 +63,12 @@ class MeetingPersistenceAdapter(
     override fun saveMeetingUser(meetingUser: MeetingUser) {
         val entity = meetingPersistenceMapper.mapToEntity(meetingUser)
         meetingUserRepository.save(entity)
+    }
+
+    override fun saveMeetingUsers(meetingUsers: List<MeetingUser>) {
+        val entities = meetingUsers.map {
+            meetingPersistenceMapper.mapToEntity(it)
+        }
+        meetingUserRepository.saveAll(entities)
     }
 }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import kr.bomiza.universe.business.attendance.adapter.`in`.web.model.request.AttendanceRequestDto
 import kr.bomiza.universe.business.attendance.adapter.`in`.web.model.response.AttendanceResponseDto
 import kr.bomiza.universe.domain.security.model.SecurityUser
+import org.springdoc.core.annotations.ParameterObject
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -37,6 +38,6 @@ interface IAttendanceController {
     @Operation(summary = "사용자 접속기록 확인", description = "사용자 접속기록 확인 설명")
     fun findAllAttendance(
         @AuthenticationPrincipal securityUser: SecurityUser,
-        page: Pageable
+        @ParameterObject page: Pageable
     ): ResponseEntity<List<AttendanceResponseDto>>
 }

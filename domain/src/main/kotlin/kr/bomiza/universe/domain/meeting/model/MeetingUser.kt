@@ -27,4 +27,8 @@ class MeetingUser(
         this.joinTime = joinTime
         this.guest = guest
     }
+
+    fun finished() {
+        state = MeetingUserState.FINISHED
+    }
 }

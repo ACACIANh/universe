@@ -15,11 +15,12 @@ class MeetingJpaEntity(
     @JoinColumn(name = "user_id")
     var masterUser: UserJpaEntity,
 
+    @Column(unique = true)
     var date: LocalDate,
 
     var capacityMember: Int,
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], targetEntity = MeetingUserJpaEntity::class)
     @JoinColumn(name = "meeting_id")
     var meetingUsers: List<MeetingUserJpaEntity>,
 

@@ -21,6 +21,7 @@ class UserJpaEntity(
 
     @Enumerated(EnumType.STRING)
     var role: UserRole,
-) : UserEntity(id) {
+
+    ) : UserEntity(id) {
 
 }

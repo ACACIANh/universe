@@ -5,4 +5,5 @@ import kr.bomiza.universe.domain.meeting.model.MeetingUser
 interface SaveMeetingUserPort {
 
     fun saveMeetingUser(meetingUser: MeetingUser)
+    fun saveMeetingUsers(meetingUsers: List<MeetingUser>)
 }

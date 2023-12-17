@@ -34,6 +34,6 @@ class MeetingPersistenceMapper {
     }
 
     fun mapToEntity(meetingUser: MeetingUser): MeetingUserJpaEntity {
-        return MeetingUserJpaEntity(meetingUser.id, meetingUser.meetingId, mapToEntity(meetingUser.user), meetingUser.state, meetingUser.joinTime, meetingUser.guest)
+        return MeetingUserJpaEntity(meetingUser.id, meetingUser.meetingId, mapToEntity(meetingUser.user), meetingUser.state, meetingUser.joinTime, meetingUser.guest, meetingUser.createdDate)
     }
 }

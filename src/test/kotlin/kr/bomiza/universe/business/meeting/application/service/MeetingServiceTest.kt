@@ -1,4 +1,4 @@
-package kr.bomiza.universe.meeting.application.service
+package kr.bomiza.universe.business.meeting.application.service
 
 import kr.bomiza.universe.common.util.UserContextUtils
 import kr.bomiza.universe.business.meeting.adapter.`in`.web.model.request.MeetingCreateRequestDto

@@ -1,4 +1,4 @@
-package kr.bomiza.universe.meeting.domain.model
+package kr.bomiza.universe.business.meeting.domain.model
 
 import kr.bomiza.universe.common.enums.MDCKeys
 import kr.bomiza.universe.common.enums.UserState
