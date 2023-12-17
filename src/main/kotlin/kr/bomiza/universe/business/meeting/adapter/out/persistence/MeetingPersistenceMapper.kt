@@ -30,10 +30,10 @@ class MeetingPersistenceMapper {
     }
 
     fun mapToDomain(entity: MeetingUserJpaEntity): MeetingUser {
-        return MeetingUser( entity.id, mapToDomain(entity.meeting), mapToDomain(entity.user), entity.state, entity.joinTime, entity.guest, entity.createdDate)
+        return MeetingUser( entity.id, entity.meetingId, mapToDomain(entity.user), entity.state, entity.joinTime, entity.guest, entity.createdDate)
     }
 
     fun mapToEntity(meetingUser: MeetingUser): MeetingUserJpaEntity {
-        return MeetingUserJpaEntity(meetingUser.id, mapToEntity(meetingUser.meeting), mapToEntity(meetingUser.user), meetingUser.state, meetingUser.joinTime, meetingUser.guest)
+        return MeetingUserJpaEntity(meetingUser.id, meetingUser.meetingId, mapToEntity(meetingUser.user), meetingUser.state, meetingUser.joinTime, meetingUser.guest)
     }
 }

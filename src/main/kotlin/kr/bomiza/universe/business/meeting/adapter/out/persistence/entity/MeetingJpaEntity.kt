@@ -1,6 +1,5 @@
 package kr.bomiza.universe.business.meeting.adapter.out.persistence.entity
 
-import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import kr.bomiza.universe.common.entity.BaseEntity
 import java.time.LocalDate
@@ -20,9 +19,8 @@ class MeetingJpaEntity(
 
     var capacityMember: Int,
 
-    @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "meeting_user_id")
+    @JoinColumn(name = "meeting_id")
     var meetingUsers: List<MeetingUserJpaEntity>,
 
     ) : BaseEntity(id) {

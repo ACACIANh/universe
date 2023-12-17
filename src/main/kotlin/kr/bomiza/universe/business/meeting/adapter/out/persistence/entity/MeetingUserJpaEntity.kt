@@ -1,6 +1,5 @@
 package kr.bomiza.universe.business.meeting.adapter.out.persistence.entity
 
-import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 import kr.bomiza.universe.common.entity.BaseEntity
 import kr.bomiza.universe.domain.meeting.enums.MeetingUserState
@@ -13,12 +12,10 @@ class MeetingUserJpaEntity(
 
     id: UUID,
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "meeting_id", unique = false)
-    var meeting: MeetingJpaEntity,
+    @Column(name = "meeting_id")
+    var meetingId: UUID,
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     var user: UserJpaEntity,
 

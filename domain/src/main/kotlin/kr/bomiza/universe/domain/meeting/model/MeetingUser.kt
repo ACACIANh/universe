@@ -9,7 +9,7 @@ import java.util.*
 
 class MeetingUser(
     id: UUID,
-    val meeting: Meeting,
+    val meetingId: UUID,
     val user: User,
     var state: MeetingUserState,
     var joinTime: LocalTime,
@@ -18,7 +18,7 @@ class MeetingUser(
 ) : Base(id) {
 
     constructor(meeting: Meeting, user: User, state: MeetingUserState, joinTime: LocalTime, guest: Boolean) :
-            this(newInstance(), meeting, user, state, joinTime, guest, null)
+            this(newInstance(), meeting.id, user, state, joinTime, guest, null)
 
     fun updateUserDate(user: User, joinTime: LocalTime, guest: Boolean) {
         if (this.user.id != user.id) {
