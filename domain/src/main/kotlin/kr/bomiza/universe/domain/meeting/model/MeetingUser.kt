@@ -21,8 +21,8 @@ class MeetingUser(
             this(newInstance(), meeting, user, state, joinTime, guest, null)
 
     fun updateUserDate(user: User, joinTime: LocalTime, guest: Boolean) {
-        if (id != user.id) {
-            throw InvalidAccessResourceException(id, user.id)
+        if (this.user.id != user.id) {
+            throw InvalidAccessResourceException(this.user.id, user.id)
         }
         this.joinTime = joinTime
         this.guest = guest

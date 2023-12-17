@@ -7,10 +7,12 @@ import kr.bomiza.universe.business.attendance.application.port.out.LoadUserPort
 import kr.bomiza.universe.business.attendance.application.port.out.SaveAttendancePort
 import kr.bomiza.universe.common.annotation.UseCase
 import kr.bomiza.universe.common.util.TimeUtils
+import kr.bomiza.universe.domain.attendance.event.AttendanceEvent
 import kr.bomiza.universe.domain.attendance.exception.AttendanceCheckOutException
 import kr.bomiza.universe.domain.attendance.exception.ExistAttendanceCheckInException
 import kr.bomiza.universe.domain.attendance.exception.NotFoundAttendanceException
 import kr.bomiza.universe.domain.attendance.model.Attendance
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -18,6 +20,7 @@ import java.util.*
 @UseCase
 @Transactional(readOnly = true)
 class AttendanceService(
+    val eventPublisher: ApplicationEventPublisher,
     val loadUserPort: LoadUserPort,
     val saveAttendancePort: SaveAttendancePort,
     val loadAttendancePort: LoadAttendancePort,
@@ -42,7 +45,7 @@ class AttendanceService(
             it.checkOut(TimeUtils.requestTime())
             saveAttendancePort.saveAttendance(it)
         } ?: throw AttendanceCheckOutException()
-        // 참여 완료에 대한 처리 필요
+        eventPublisher.publishEvent(AttendanceEvent(userId))
     }
 
     override fun findLastAttendance(userId: UUID): Attendance {

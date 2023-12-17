@@ -55,6 +55,5 @@
 3. 매주 월요일 정모추가 확인
 4. release 브랜치 - in memory db -> 외부 Db 사용
 5. queryDsl 설정 추가
-6. ci/cd 설정 -> github-action
-7. admin url 변경
-8. event listener 추가
+6. ci/cd 설정 -> github-action 
+7. event listener 에 추가할 것 logging
