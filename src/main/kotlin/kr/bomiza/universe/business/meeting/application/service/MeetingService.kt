@@ -5,6 +5,7 @@ import kr.bomiza.universe.business.meeting.adapter.`in`.web.model.request.Meetin
 import kr.bomiza.universe.business.meeting.adapter.`in`.web.model.request.MeetingJoinUpdateRequestDto
 import kr.bomiza.universe.business.meeting.application.port.`in`.CreateMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.`in`.FindMeetingUseCase
+import kr.bomiza.universe.business.meeting.application.port.`in`.FinishMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.`in`.JoinMeetingUseCase
 import kr.bomiza.universe.business.meeting.application.port.out.*
 import kr.bomiza.universe.common.annotation.UseCase
@@ -20,7 +21,7 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.util.*
 
-//todo: exception 발생 위치를, Service 에서 할지, PersistenceAdapter 에서 할지 고민, 일단 peersistence
+//todo: exception 발생 위치를, Service 에서 할지, PersistenceAdapter 에서 할지 고민, 일단 persistence
 @UseCase
 @Transactional(readOnly = true)
 class MeetingService(
@@ -32,7 +33,8 @@ class MeetingService(
     val universeProperties: UniverseProperties,
 ) : CreateMeetingUseCase,
     JoinMeetingUseCase,
-    FindMeetingUseCase {
+    FindMeetingUseCase,
+    FinishMeetingUseCase {
 
     @Transactional
     override fun createMeeting(userId: UUID, requestDto: MeetingCreateRequestDto): Meeting {
@@ -92,6 +94,17 @@ class MeetingService(
         val meeting = Meeting(adminUser, createDate, universeProperties.meeting.capacity)
         saveMeetingPort.saveMeeting(meeting)
         log.info("createMeetingOnAdmin success createdDate: $createDate")
+    }
+
+    @Transactional
+    override fun finish(userId: UUID, date: LocalDate) {
+        val loadMeetingUsers = loadMeetingUserPort.loadMeetingUserByUserIdAndDate(userId, date)
+            .onEach { it.finished() }
+        saveMeetingUserPort.saveMeetingUsers(loadMeetingUsers)
+        val meeting = loadMeetingPort.loadMeeting(date)?.also {
+            it.refreshUsers()
+        } ?: return
+        saveMeetingPort.saveMeeting(meeting)
     }
 
     companion object {
