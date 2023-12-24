@@ -45,14 +45,19 @@ class MeetingPersistenceAdapterTest(
 
         //when
         val loadMeetingUser = meetingPersistenceAdapter.loadMeetingUser(meetingUser.id)
-        val loadMeetingUserByUserId =
+        val loadMeetingUsersByUserId =
             meetingPersistenceAdapter.loadMeetingUserByUserIdAndDate(adminUser.id, LocalDate.now())
 
         //then
-        Assertions.assertThatThrownBy {
-            meetingPersistenceAdapter.loadMeetingUserByUserIdAndDate(adminUser.id, LocalDate.now().minusDays(1))
-        }.isInstanceOf(NotFoundMeetingUserException::class.java)
+        Assertions.assertThat(
+            meetingPersistenceAdapter.loadMeetingUserByUserIdAndDate(
+                adminUser.id,
+                LocalDate.now().minusDays(1)
+            )
+        ).isEmpty()
         Assertions.assertThat(loadMeetingUser.id).isEqualTo(meetingUser.id)
-        Assertions.assertThat(loadMeetingUserByUserId.id).isEqualTo(meetingUser.id)
+        loadMeetingUsersByUserId.forEach {
+            Assertions.assertThat(it.id).isEqualTo(meetingUser.id)
+        }
     }
 }

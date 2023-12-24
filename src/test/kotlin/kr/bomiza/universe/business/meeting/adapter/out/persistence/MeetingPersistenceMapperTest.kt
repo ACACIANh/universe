@@ -143,10 +143,9 @@ class MeetingPersistenceMapperTest {
             userEntity,
             MeetingUserState.PARTICIPATION,
             LocalTime.now(),
-            false
-        ).also {
-            it.createdDate = LocalDateTime.now()
-        }
+            false,
+            LocalDateTime.now()
+        )
 
         // when
         val meetingUser = meetingPersistenceMapper.mapToDomain(meetingUserEntity)
