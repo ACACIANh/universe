@@ -14,6 +14,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 @ControllerAdvice
 class ExceptionControllerAdvice {
 
+    // common exception
+    @ExceptionHandler(Exception::class)
+    fun handleInternalServer(e: Exception): ResponseEntity<ExceptionResponse> {
+
+        log.error("Internal Server Error occurred: ${e.message}", e)
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body<ExceptionResponse>(ExceptionResponse(e))
+    }
+
     // application custom exception
     @ExceptionHandler(UniverseException::class)
     fun handleInternalServer(e: UniverseException): ResponseEntity<ExceptionResponse> {
@@ -21,13 +31,7 @@ class ExceptionControllerAdvice {
         log.error("Internal Server Error occurred: ${e.message}", e)
 
         return ResponseEntity.status(e.status)
-            .body<ExceptionResponse>(
-                ExceptionResponse(
-                    message = e.message,
-                    exceptionType = e::class.java.simpleName,
-                    exceptionMessage = e.exceptionMessage
-                )
-            )
+            .body<ExceptionResponse>(ExceptionResponse(e))
     }
 
     // validation exception
@@ -38,27 +42,12 @@ class ExceptionControllerAdvice {
             .groupBy(FieldError::getDefaultMessage)
             .mapValues { it.value.map(FieldError::getField) }
         val message = errors.toString()
-        log.warn(message, e)
+        log.error(message, e)
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body<ExceptionResponse>(
                 ExceptionResponse(
                     message = message,
-                    exceptionType = e::class.java.simpleName,
-                    exceptionMessage = e.message
-                )
-            )
-    }
-
-    // common exception
-    @ExceptionHandler(Exception::class)
-    fun handleInternalServer(e: Exception): ResponseEntity<ExceptionResponse> {
-
-        log.error("Internal Server Error occurred: ${e.message}", e)
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body<ExceptionResponse>(
-                ExceptionResponse(
-                    message = "Internal Server Error occurred",
                     exceptionType = e::class.java.simpleName,
                     exceptionMessage = e.message
                 )

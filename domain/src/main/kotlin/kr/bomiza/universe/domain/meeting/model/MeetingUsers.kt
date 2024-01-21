@@ -39,7 +39,10 @@ class MeetingUsers(
             .sortedBy(MeetingUser::createdDate)
             .take(capacity)
             .filter { it.state == MeetingUserState.WAITING }
-            .forEach { it.state = MeetingUserState.PARTICIPATION }
+            .forEach {
+                it.state = MeetingUserState.PARTICIPATION
+                // 참여 했다는 알림 event 추가필요
+            }
     }
 
     fun currentUserCount(): Int = meetingUsers.count()
